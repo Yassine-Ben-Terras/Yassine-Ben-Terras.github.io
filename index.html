@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,22 +10,27 @@
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" />
   <style>
     :root {
-      --navy: #0f1b35;
-      --navy2: #162040;
-      --blue: #1e3a8a;
+      --navy: #080f1f;
+      --navy2: #0d1628;
+      --blue: #1a3270;
       --mid: #2563eb;
-      --accent: #38bdf8;
-      --accent2: #0ea5e9;
-      --green: #34d399;
-      --gold: #fbbf24;
-      --purple: #a78bfa;
-      --rose: #fb7185;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --border: rgba(56, 189, 248, 0.15);
-      --card: rgba(255, 255, 255, 0.03);
-      --card-hover: rgba(56, 189, 248, 0.06);
-      --radius: 14px;
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.18);
+      --green: #10b981;
+      --gold: #f59e0b;
+      --purple: #818cf8;
+      --rose: #f43f5e;
+      --text: #e8edf5;
+      --text-secondary: #b8c4d8;
+      --muted: #7a8fa8;
+      --border: rgba(59, 130, 246, 0.14);
+      --border-strong: rgba(59, 130, 246, 0.28);
+      --card: rgba(13, 22, 40, 0.7);
+      --card-hover: rgba(22, 36, 66, 0.85);
+      --nav-bg: rgba(8, 15, 31, 0.9);
+      --radius: 12px;
+      --radius-sm: 7px;
     }
 
     *,
@@ -45,7 +50,7 @@
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.7;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -56,9 +61,9 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(30, 58, 138, 0.35) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 90% 100%, rgba(14, 165, 233, 0.18) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 55% at 5% 0%, rgba(37, 99, 235, 0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 95% 95%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 25% at 55% 45%, rgba(99, 102, 241, 0.06) 0%, transparent 55%);
       pointer-events: none;
       z-index: 0;
     }
@@ -69,9 +74,9 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+        linear-gradient(rgba(59, 130, 246, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
       pointer-events: none;
       z-index: 0;
     }
@@ -90,8 +95,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(20px);
-      background: rgba(15, 27, 53, 0.85);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      background: var(--nav-bg);
       border-bottom: 1px solid var(--border);
     }
 
@@ -109,11 +115,15 @@
     .nav-logo {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--accent);
-      letter-spacing: 0.04em;
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: 0.02em;
       text-decoration: none;
       flex-shrink: 0;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
     }
 
     .nav-links {
@@ -127,26 +137,42 @@
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 500;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--accent);
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     /* ── LANG SWITCHER ── */
     .lang-switcher {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
       flex-shrink: 0;
-      background: rgba(56, 189, 248, 0.05);
+      background: rgba(59, 130, 246, 0.06);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 3px;
     }
 
@@ -155,7 +181,7 @@
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.08em;
-      padding: 4px 10px;
+      padding: 4px 11px;
       border-radius: 5px;
       border: none;
       cursor: pointer;
@@ -166,19 +192,19 @@
 
     .lang-btn.active {
       background: var(--accent);
-      color: var(--navy);
-      font-weight: 700;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
     }
 
     .lang-btn:hover:not(.active) {
-      color: var(--accent);
-      background: rgba(56, 189, 248, 0.08);
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.1);
     }
 
     /* ── HERO ── */
     .hero {
-      padding: 5.5rem 0 4rem;
+      padding: 6rem 0 4.5rem;
       text-align: center;
     }
 
@@ -186,16 +212,16 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      border: 1px solid var(--border);
+      padding: 5px 16px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
       border-radius: 100px;
       font-family: 'DM Mono', monospace;
       font-size: 11px;
-      color: var(--accent);
+      color: var(--green);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: rgba(56, 189, 248, 0.05);
-      margin-bottom: 2rem;
+      background: rgba(16, 185, 129, 0.06);
+      margin-bottom: 2.25rem;
     }
 
     .hero-badge::before {
@@ -209,94 +235,94 @@
     }
 
     @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.5;
-        transform: scale(0.8);
-      }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .hero h1 .name-line {
+      display: block;
     }
 
     .hero h1 span {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--mid) 60%, var(--purple) 100%);
+      background: linear-gradient(130deg, var(--accent2) 0%, var(--accent) 40%, var(--purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .hero-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 1rem auto 2.5rem;
       font-weight: 300;
+      line-height: 1.75;
     }
 
     .hero-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
       justify-content: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.75rem;
     }
 
     .chip {
-      padding: 5px 14px;
+      padding: 5px 13px;
       border-radius: 100px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-family: 'DM Mono', monospace;
       border: 1px solid;
       letter-spacing: 0.03em;
       font-weight: 500;
+      transition: transform 0.15s ease;
     }
 
+    .chip:hover { transform: translateY(-1px); }
+
     .chip-blue {
-      border-color: rgba(37, 99, 235, .5);
+      border-color: rgba(59, 130, 246, .35);
       color: #93c5fd;
-      background: rgba(37, 99, 235, .1);
+      background: rgba(59, 130, 246, .08);
     }
 
     .chip-cyan {
-      border-color: rgba(56, 189, 248, .4);
-      color: var(--accent);
-      background: rgba(56, 189, 248, .07);
+      border-color: rgba(96, 165, 250, .35);
+      color: var(--accent2);
+      background: rgba(96, 165, 250, .07);
     }
 
     .chip-green {
-      border-color: rgba(52, 211, 153, .4);
+      border-color: rgba(16, 185, 129, .35);
       color: var(--green);
-      background: rgba(52, 211, 153, .07);
+      background: rgba(16, 185, 129, .07);
     }
 
     .chip-purple {
-      border-color: rgba(167, 139, 250, .4);
+      border-color: rgba(129, 140, 248, .35);
       color: var(--purple);
-      background: rgba(167, 139, 250, .07);
+      background: rgba(129, 140, 248, .07);
     }
 
     .chip-gold {
-      border-color: rgba(251, 191, 36, .4);
+      border-color: rgba(245, 158, 11, .35);
       color: var(--gold);
-      background: rgba(251, 191, 36, .07);
+      background: rgba(245, 158, 11, .07);
     }
 
     /* ── SECTION ── */
     .section {
-      margin-bottom: 5rem;
+      margin-bottom: 5.5rem;
     }
 
     .section-header {
@@ -308,26 +334,27 @@
 
     .section-num {
       font-family: 'DM Mono', monospace;
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--accent);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       border: 1px solid var(--border);
       padding: 3px 10px;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.05);
+      border-radius: var(--radius-sm);
+      background: rgba(59, 130, 246, 0.06);
     }
 
     .section-title {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       letter-spacing: -0.01em;
+      color: var(--text);
     }
 
     .section-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+      background: linear-gradient(90deg, var(--border-strong) 0%, transparent 100%);
     }
 
     /* ── PROJECT CARDS ── */
@@ -344,7 +371,7 @@
       padding: 1.75rem;
       position: relative;
       overflow: hidden;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
       cursor: default;
       animation: fadeUp 0.5s ease both;
     }
@@ -356,43 +383,24 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--cat-color, var(--accent)), transparent);
-      opacity: 0.8;
+      background: linear-gradient(90deg, var(--cat-color, var(--accent)), transparent 70%);
+      opacity: 0.9;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
       background: var(--card-hover);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(59, 130, 246, 0.08);
     }
 
-    .card:nth-child(1) {
-      animation-delay: 0.05s;
-    }
-
-    .card:nth-child(2) {
-      animation-delay: 0.10s;
-    }
-
-    .card:nth-child(3) {
-      animation-delay: 0.15s;
-    }
-
-    .card:nth-child(4) {
-      animation-delay: 0.20s;
-    }
-
-    .card:nth-child(5) {
-      animation-delay: 0.25s;
-    }
-
-    .card:nth-child(6) {
-      animation-delay: 0.30s;
-    }
-
-    .card:nth-child(7) {
-      animation-delay: 0.35s;
-    }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
 
     .card-top {
       display: flex;
@@ -407,23 +415,24 @@
       font-size: 10px;
       color: var(--cat-color, var(--accent));
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 6px;
+      letter-spacing: 0.13em;
+      margin-bottom: 5px;
+      opacity: 0.9;
     }
 
     .card-title {
       font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       line-height: 1.3;
-      color: #f1f5f9;
+      color: var(--text);
     }
 
     .card-icon {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       flex-shrink: 0;
       margin-top: 2px;
-      opacity: 0.8;
+      opacity: 0.75;
     }
 
     .card-divider {
@@ -436,29 +445,31 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
+      gap: 0.6rem;
     }
 
     .card-bullets li {
       display: flex;
       gap: 10px;
       font-size: 13.5px;
-      color: #cbd5e1;
-      line-height: 1.55;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
 
     .card-bullets li::before {
-      content: '—';
+      content: '›';
       color: var(--cat-color, var(--accent));
       flex-shrink: 0;
-      margin-top: 1px;
-      font-size: 12px;
+      margin-top: 0px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.55;
     }
 
     .card-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
       margin-top: 1.25rem;
       padding-top: 1rem;
       border-top: 1px solid var(--border);
@@ -466,11 +477,11 @@
 
     .tag {
       font-family: 'DM Mono', monospace;
-      font-size: 10.5px;
+      font-size: 10px;
       padding: 3px 9px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.15);
       color: var(--muted);
       letter-spacing: 0.03em;
     }
@@ -483,7 +494,7 @@
     /* ── SKILLS SECTION ── */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       gap: 1rem;
     }
 
@@ -492,6 +503,12 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.25rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .skill-group:hover {
+      border-color: var(--border-strong);
+      background: var(--card-hover);
     }
 
     .skill-group-title {
@@ -499,8 +516,8 @@
       font-size: 10px;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.8rem;
     }
 
     .skill-items {
@@ -510,26 +527,107 @@
     }
 
     .skill-item {
-      font-size: 12px;
-      color: #94a3b8;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.12);
       padding: 2px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 2rem 0;
+      padding: 2.5rem 0;
       text-align: center;
       color: var(--muted);
       font-size: 13px;
     }
 
     footer strong {
-      color: var(--accent);
+      color: var(--text);
       font-family: 'Syne', sans-serif;
+    }
+
+    /* ── SOCIAL LINKS ── */
+    .social-links {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 22px;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      background: rgba(59, 130, 246, 0.05);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .social-btn:hover {
+      color: #fff;
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.14);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.18);
+    }
+
+    .social-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── GITHUB LINK BUTTON ON CARDS ── */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-github-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s ease;
+    }
+
+    .card-github-btn:hover {
+      color: var(--text);
+      border-color: var(--border-strong);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .card-github-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+      flex-shrink: 0;
     }
 
     /* ANIMATE IN */
@@ -567,7 +665,7 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="#">YB — Portfolio</a>
+      <a class="nav-logo" href="#">YBT — <span>Portfolio</span></a>
       <ul class="nav-links">
         <li><a href="#streaming" data-i18n="nav.data">Data Engineering</a></li>
         <li><a href="#ai" data-i18n="nav.ai">IA & Agents</a></li>
@@ -576,8 +674,8 @@
       </ul>
       <!-- Language switcher -->
       <div class="lang-switcher" role="group" aria-label="Language switcher">
-        <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')" aria-pressed="true">FR</button>
-        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-pressed="false">EN</button>
+        <button class="lang-btn" id="btn-fr" onclick="setLang('fr')" aria-pressed="false">FR</button>
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
       </div>
     </div>
   </nav>
@@ -601,6 +699,18 @@
         <span class="chip chip-gold">Azure</span>
         <span class="chip chip-cyan">Databricks</span>
         <span class="chip chip-cyan">Microsoft Fabric</span>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links">
+        <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener noreferrer" class="social-btn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener noreferrer" class="social-btn">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
       </div>
     </section>
 
@@ -641,6 +751,12 @@
             <span class="tag">Grafana</span>
             <span class="tag">Docker Compose</span>
           </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/flight-tracking-pipeline" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
+          </div>
         </div>
 
         <!-- Cabinet Médical EDA -->
@@ -668,6 +784,12 @@
             <span class="tag">Kafka UI · AKHQ</span>
             <span class="tag">Microservices</span>
             <span class="tag">Java</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/Event-driven-architecture-Cabinet-Medical" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
 
@@ -712,31 +834,44 @@
             <span class="tag">pytest (188 tests)</span>
             <span class="tag">PagerDuty · Slack</span>
           </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/Multi-Agent-System-for-Data-Pipeline-Silent-Failure-Detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
+          </div>
         </div>
 
-        <!-- Timetable -->
+        <!-- Planify — Intelligent Timetabling -->
         <div class="card" style="--cat-color: #fbbf24;">
           <div class="card-top">
             <div>
               <div class="card-category" data-i18n="c.tt.cat">Optimisation · Algorithmes</div>
-              <div class="card-title" data-i18n="c.tt.title">Solution de Gestion d'Emplois du Temps Universitaires</div>
+              <div class="card-title" data-i18n="c.tt.title">Intelligent Timetabling Optimization System — Planify</div>
             </div>
             <div class="card-icon">🗓️</div>
           </div>
           <div class="card-divider"></div>
           <ul class="card-bullets">
-            <li data-i18n="c.tt.b1">Développé une solution full stack de génération automatique d'emplois du temps
-              éliminant 100% des conflits pour +200 créneaux hebdomadaires</li>
-            <li data-i18n="c.tt.b2">Implémenté un solveur de contraintes (OR-Tools CP-SAT) avec pénalités soft pour
-              optimiser la compacité des plannings et les pauses inter-sessions</li>
-            <li data-i18n="c.tt.b3">Architecture REST full stack livrée en production et adoptée par le département
-              informatique de l'université</li>
+            <li data-i18n="c.tt.b1">Conçu un système full-stack de génération automatique d'emplois du temps pour établissements d'enseignement supérieur, automatisant la planification complexe avec programmation par contraintes et SAT (OR-Tools MaxSAT) pour produire des emplois du temps sans conflit</li>
+            <li data-i18n="c.tt.b2">Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification sécurisée Spring Security + JWT, import Excel (Apache POI) et export PDF automatique</li>
+            <li data-i18n="c.tt.b3">Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples pour un résultat optimal</li>
           </ul>
           <div class="card-tags">
             <span class="tag">Java · Spring Boot</span>
-            <span class="tag">OR-Tools CP-SAT</span>
-            <span class="tag">REST API</span>
-            <span class="tag">Constraint Programming</span>
+            <span class="tag">Google OR-Tools MaxSAT</span>
+            <span class="tag">Vue 3 · TypeScript</span>
+            <span class="tag">Vite · Pinia</span>
+            <span class="tag">Spring Security + JWT</span>
+            <span class="tag">Apache POI</span>
+            <span class="tag">PostgreSQL / MySQL</span>
+            <span class="tag">SAT Solving</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/Intelligent-Timetabling-Optimization-System" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
 
@@ -781,6 +916,12 @@
             <span class="tag">Docker</span>
             <span class="tag">SMOTE</span>
           </div>
+          <div class="card-footer">
+            <a href="https://github.com/YassineBentTerras/banking-fraud-detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
+          </div>
         </div>
 
         <!-- Student Performance -->
@@ -808,6 +949,12 @@
             <span class="tag">Matplotlib · Seaborn</span>
             <span class="tag">Random Forest</span>
             <span class="tag">ACP</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/student-performance-data-mining" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
 
@@ -843,6 +990,12 @@
             <span class="tag">Logistic Regression</span>
             <span class="tag">Association Rules</span>
             <span class="tag">Jupyter Notebooks</span>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Yassine-Ben-Terras/data-insights" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              View on GitHub
+            </a>
           </div>
         </div>
 
@@ -930,6 +1083,10 @@
   <footer>
     <div class="wrap">
       <strong>Yassine Ben Terras</strong> · Data Engineer &amp; AI · Rabat, Maroc · yassine.benterras02@gmail.com
+      <div style="display:flex;justify-content:center;gap:16px;margin-top:0.75rem;">
+        <a href="https://github.com/YassineBentTerras" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:0.05em;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/yassine-ben-terras" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:0.05em;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">LinkedIn ↗</a>
+      </div>
     </div>
   </footer>
 
@@ -978,10 +1135,10 @@
 
         /* Card: Timetable */
         'c.tt.cat': 'Optimisation · Algorithmes',
-        'c.tt.title': "Solution de Gestion d'Emplois du Temps Universitaires",
-        'c.tt.b1': "Développé une solution full stack de génération automatique d'emplois du temps éliminant 100% des conflits pour +200 créneaux hebdomadaires",
-        'c.tt.b2': 'Implémenté un solveur de contraintes (OR-Tools CP-SAT) avec pénalités soft pour optimiser la compacité des plannings et les pauses inter-sessions',
-        'c.tt.b3': "Architecture REST full stack livrée en production et adoptée par le département informatique de l'université",
+        'c.tt.title': "Intelligent Timetabling Optimization System — Planify",
+        'c.tt.b1': "Conçu un système full-stack de génération automatique d'emplois du temps pour établissements d'enseignement supérieur, automatisant la planification complexe avec programmation par contraintes et SAT (OR-Tools MaxSAT) pour produire des emplois du temps sans conflit",
+        'c.tt.b2': "Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification sécurisée Spring Security + JWT, import Excel (Apache POI) et export PDF automatique",
+        'c.tt.b3': "Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples pour un résultat optimal",
 
         /* Card: Fraude */
         'c.fraud.cat': "ML Production · Détection d'Anomalies",
@@ -1054,10 +1211,10 @@
 
         /* Card: Timetable */
         'c.tt.cat': 'Optimization · Algorithms',
-        'c.tt.title': 'University Timetable Management Solution',
-        'c.tt.b1': 'Developed a full-stack solution for automatic timetable generation eliminating 100% of conflicts across 200+ weekly time slots',
-        'c.tt.b2': 'Implemented a constraint solver (OR-Tools CP-SAT) with soft penalties to optimize schedule compactness and inter-session breaks',
-        'c.tt.b3': 'Full-stack REST architecture delivered to production and adopted by the university computer science department',
+        'c.tt.title': 'Intelligent Timetabling Optimization System — Planify',
+        'c.tt.b1': 'Designed a full-stack automated timetable generation system for higher education institutions, automating complex scheduling using constraint programming and SAT techniques (OR-Tools MaxSAT) to produce conflict-free timetables',
+        'c.tt.b2': 'Built an advanced optimization engine handling professor availability, room capacities, session types, and working hours — with secure Spring Security + JWT auth, Excel bulk import (Apache POI), and automated PDF export',
+        'c.tt.b3': 'Monorepo architecture with Vue 3 + Vite + TypeScript + Pinia frontend and Spring Boot + JPA backend; MaxSAT solver enforcing hard constraints and optimizing soft preferences for an efficient, conflict-free result',
 
         /* Card: Fraude */
         'c.fraud.cat': 'ML Production · Anomaly Detection',
@@ -1091,7 +1248,7 @@
       }
     };
 
-    let currentLang = 'fr';
+    let currentLang = 'en';
 
     function setLang(lang) {
       if (lang === currentLang) return;
@@ -1114,6 +1271,16 @@
       document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr');
       document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
     }
+
+    // Initialize with English on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations['en'] && translations['en'][key]) {
+          el.innerHTML = translations['en'][key];
+        }
+      });
+    });
   </script>
 
 </body>
