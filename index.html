@@ -1,1279 +1,1075 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yassine Ben Terras — Portfolio Data Engineer & AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" />
-  <style>
-    :root {
-      --navy: #080f1f;
-      --navy2: #0d1628;
-      --blue: #1a3270;
-      --mid: #2563eb;
-      --accent: #3b82f6;
-      --accent2: #60a5fa;
-      --accent-glow: rgba(59, 130, 246, 0.18);
-      --green: #10b981;
-      --gold: #f59e0b;
-      --purple: #818cf8;
-      --rose: #f43f5e;
-      --text: #e8edf5;
-      --text-secondary: #b8c4d8;
-      --muted: #7a8fa8;
-      --border: rgba(59, 130, 246, 0.14);
-      --border-strong: rgba(59, 130, 246, 0.28);
-      --card: rgba(13, 22, 40, 0.7);
-      --card-hover: rgba(22, 36, 66, 0.85);
-      --nav-bg: rgba(8, 15, 31, 0.9);
-      --radius: 12px;
-      --radius-sm: 7px;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--navy);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── BACKGROUND ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 55% at 5% 0%, rgba(37, 99, 235, 0.22) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 40% at 95% 95%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 35% 25% at 55% 45%, rgba(99, 102, 241, 0.06) 0%, transparent 55%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── GRID LINES ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(59, 130, 246, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59, 130, 246, 0.025) 1px, transparent 1px);
-      background-size: 72px 72px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── LAYOUT ── */
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(24px) saturate(1.4);
-      -webkit-backdrop-filter: blur(24px) saturate(1.4);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      gap: 1rem;
-    }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--text);
-      letter-spacing: 0.02em;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-
-    .nav-logo span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12.5px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* ── LANG SWITCHER ── */
-    .lang-switcher {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      flex-shrink: 0;
-      background: rgba(59, 130, 246, 0.06);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 3px;
-    }
-
-    .lang-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      padding: 4px 11px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: transparent;
-      color: var(--muted);
-    }
-
-    .lang-btn.active {
-      background: var(--accent);
-      color: #fff;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
-    }
-
-    .lang-btn:hover:not(.active) {
-      color: var(--text);
-      background: rgba(59, 130, 246, 0.1);
-    }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 6rem 0 4.5rem;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 16px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 100px;
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--green);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: rgba(16, 185, 129, 0.06);
-      margin-bottom: 2.25rem;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-      line-height: 1.06;
-      letter-spacing: -0.025em;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-    }
-
-    .hero h1 .name-line {
-      display: block;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(130deg, var(--accent2) 0%, var(--accent) 40%, var(--purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 540px;
-      margin: 1rem auto 2.5rem;
-      font-weight: 300;
-      line-height: 1.75;
-    }
-
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      justify-content: center;
-      margin-bottom: 2.75rem;
-    }
-
-    .chip {
-      padding: 5px 13px;
-      border-radius: 100px;
-      font-size: 11.5px;
-      font-family: 'DM Mono', monospace;
-      border: 1px solid;
-      letter-spacing: 0.03em;
-      font-weight: 500;
-      transition: transform 0.15s ease;
-    }
-
-    .chip:hover { transform: translateY(-1px); }
-
-    .chip-blue {
-      border-color: rgba(59, 130, 246, .35);
-      color: #93c5fd;
-      background: rgba(59, 130, 246, .08);
-    }
-
-    .chip-cyan {
-      border-color: rgba(96, 165, 250, .35);
-      color: var(--accent2);
-      background: rgba(96, 165, 250, .07);
-    }
-
-    .chip-green {
-      border-color: rgba(16, 185, 129, .35);
-      color: var(--green);
-      background: rgba(16, 185, 129, .07);
-    }
-
-    .chip-purple {
-      border-color: rgba(129, 140, 248, .35);
-      color: var(--purple);
-      background: rgba(129, 140, 248, .07);
-    }
-
-    .chip-gold {
-      border-color: rgba(245, 158, 11, .35);
-      color: var(--gold);
-      background: rgba(245, 158, 11, .07);
-    }
-
-    /* ── SECTION ── */
-    .section {
-      margin-bottom: 5.5rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .section-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 10.5px;
-      color: var(--accent);
-      letter-spacing: 0.12em;
-      border: 1px solid var(--border);
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      background: rgba(59, 130, 246, 0.06);
-    }
-
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.4rem;
-      letter-spacing: -0.01em;
-      color: var(--text);
-    }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--border-strong) 0%, transparent 100%);
-    }
-
-    /* ── PROJECT CARDS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-      cursor: default;
-      animation: fadeUp 0.5s ease both;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cat-color, var(--accent)), transparent 70%);
-      opacity: 0.9;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-strong);
-      background: var(--card-hover);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(59, 130, 246, 0.08);
-    }
-
-    .card:nth-child(1) { animation-delay: 0.05s; }
-    .card:nth-child(2) { animation-delay: 0.10s; }
-    .card:nth-child(3) { animation-delay: 0.15s; }
-    .card:nth-child(4) { animation-delay: 0.20s; }
-    .card:nth-child(5) { animation-delay: 0.25s; }
-    .card:nth-child(6) { animation-delay: 0.30s; }
-    .card:nth-child(7) { animation-delay: 0.35s; }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .card-category {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--cat-color, var(--accent));
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      margin-bottom: 5px;
-      opacity: 0.9;
-    }
-
-    .card-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.02rem;
-      line-height: 1.3;
-      color: var(--text);
-    }
-
-    .card-icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-      opacity: 0.75;
-    }
-
-    .card-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 1rem 0;
-    }
-
-    .card-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .card-bullets li {
-      display: flex;
-      gap: 10px;
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .card-bullets li::before {
-      content: '›';
-      color: var(--cat-color, var(--accent));
-      flex-shrink: 0;
-      margin-top: 0px;
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.55;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 1.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      padding: 3px 9px;
-      border-radius: var(--radius-sm);
-      background: rgba(59, 130, 246, 0.05);
-      border: 1px solid rgba(59, 130, 246, 0.15);
-      color: var(--muted);
-      letter-spacing: 0.03em;
-    }
-
-    /* ── FULL WIDTH CARD ── */
-    .card-full {
-      grid-column: 1 / -1;
-    }
-
-    /* ── SKILLS SECTION ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 1rem;
-    }
-
-    .skill-group {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .skill-group:hover {
-      border-color: var(--border-strong);
-      background: var(--card-hover);
-    }
-
-    .skill-group-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.8rem;
-    }
-
-    .skill-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .skill-item {
-      font-size: 11.5px;
-      color: var(--text-secondary);
-      background: rgba(59, 130, 246, 0.05);
-      border: 1px solid rgba(59, 130, 246, 0.12);
-      padding: 2px 8px;
-      border-radius: var(--radius-sm);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    footer strong {
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-    }
-
-    /* ── SOCIAL LINKS ── */
-    .social-links {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 2rem;
-      margin-bottom: 2.75rem;
-    }
-
-    .social-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 22px;
-      border-radius: var(--radius-sm);
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      border: 1px solid var(--border-strong);
-      background: rgba(59, 130, 246, 0.05);
-      color: var(--text-secondary);
-      transition: all 0.2s ease;
-    }
-
-    .social-btn:hover {
-      color: #fff;
-      border-color: var(--accent);
-      background: rgba(59, 130, 246, 0.14);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.18);
-    }
-
-    .social-btn svg {
-      width: 15px;
-      height: 15px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ── GITHUB LINK BUTTON ON CARDS ── */
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 1rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .card-github-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 14px;
-      border-radius: var(--radius-sm);
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      transition: all 0.2s ease;
-    }
-
-    .card-github-btn:hover {
-      color: var(--text);
-      border-color: var(--border-strong);
-      background: rgba(59, 130, 246, 0.08);
-    }
-
-    .card-github-btn svg {
-      width: 12px;
-      height: 12px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ANIMATE IN */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card-full {
-        grid-column: 1;
-      }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yassine Ben Terras — Data Engineer & AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:      #08090e;
+  --bg2:     #0f1018;
+  --bg3:     #141620;
+  --ink:     #e8edf5;
+  --ink2:    rgba(232,237,245,.75);
+  --dim:     rgba(232,237,245,.38);
+  --blue:    #3b82f6;
+  --bluehi:  #60a5fa;
+  --cyan:    #38bdf8;
+  --green:   #10b981;
+  --purple:  #a78bfa;
+  --rose:    #fb7185;
+  --gold:    #fbbf24;
+  --wa:      #2563eb;
+  --wb:      #7c3aed;
+  --border:  rgba(59,130,246,.13);
+  --border2: rgba(59,130,246,.26);
+  --fb: 'Barlow', sans-serif;
+  --fc: 'Barlow Condensed', sans-serif;
+  --fm: 'JetBrains Mono', monospace;
+  --fs: 'Fraunces', serif;
+  --xs:.68rem; --sm:.82rem; --base:.95rem; --md:1.05rem; --lg:1.25rem;
+  --lsc:.16em; --lsw:.09em; --lsn:.02em;
+  --radius:12px; --radius-sm:7px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);overflow-x:hidden;cursor:none;font-size:15px;line-height:1.7}
+@media(hover:none),(pointer:coarse){body{cursor:auto}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ─── CUSTOM CURSOR (desktop only) ─── */
+#cur{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:transform .1s ease,background .2s}
+#cur.lk{transform:translate(-50%,-50%) scale(3.5);background:var(--bluehi)}
+#curring{position:fixed;width:28px;height:28px;border:1px solid rgba(59,130,246,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s}
+@media(hover:none),(pointer:coarse){#cur,#curring{display:none}}
+
+/* ─── PROGRESS BAR ─── */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--wa),var(--wb));width:0%;z-index:1000;box-shadow:0 0 10px var(--blue);transition:width .08s linear}
+
+/* ─── SIDE NAV DOTS ─── */
+#nav{position:fixed;top:50%;right:1.75rem;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:100;opacity:0;animation:fi .5s ease 1.5s forwards}
+.nd{width:5px;height:5px;border-radius:50%;background:rgba(59,130,246,.18);cursor:none;transition:all .25s ease;position:relative}
+.nd::after{content:attr(data-label);position:absolute;right:18px;top:50%;transform:translateY(-50%);font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;color:var(--bluehi);white-space:nowrap;opacity:0;transition:opacity .2s}
+.nd:hover::after{opacity:1}
+.nd.on,.nd:hover{background:var(--blue);box-shadow:0 0 8px var(--blue);transform:scale(1.5)}
+@media(max-width:768px){#nav{display:none}}
+
+/* ─── NOISE TEXTURE ─── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.022;pointer-events:none;z-index:9997}
+
+/* ─── GRID OVERLAY ─── */
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(59,130,246,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.018) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+
+/* ─── HERO SECTION ─── */
+#hero{
+  position:relative;
+  width:100vw;height:100vh;height:100dvh;
+  min-height:600px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:var(--bg);
+  padding-top:56px; /* offset for fixed nav */
+}
+
+.hero-bg-glow{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 65% 55% at 10% 5%, rgba(37,99,235,.18) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 40% at 90% 90%, rgba(124,58,237,.12) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 30% at 55% 48%, rgba(59,130,246,.06) 0%, transparent 50%);
+}
+
+.hero-hud-top{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.75rem 2.5rem;
+  z-index:10;
+  opacity:0;animation:fu .7s ease .2s forwards;
+}
+
+.hud-brand{display:flex;align-items:center;gap:.8rem}
+.hud-name{font-family:var(--fc);font-weight:300;font-size:var(--sm);letter-spacing:var(--lsc);text-transform:uppercase;color:rgba(232,237,245,.42)}
+.hud-name strong{color:var(--blue);font-weight:600}
+.hud-tag{font-family:var(--fm);font-size:var(--xs);color:var(--blue);letter-spacing:var(--lsw);border:1px solid var(--border2);padding:.22rem .65rem}
+
+.hud-links{display:flex;align-items:center;gap:1.5rem}
+.hud-link{font-family:var(--fm);font-size:var(--xs);letter-spacing:var(--lsw);text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .25s;display:flex;align-items:center;gap:.4em}
+.hud-link:hover{color:var(--bluehi)}
+
+/* Hero center content */
+.hero-center{position:relative;z-index:5;text-align:center;padding:0 2rem}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:4px 15px;border:1px solid rgba(16,185,129,.28);border-radius:100px;
+  font-family:var(--fm);font-size:var(--xs);color:var(--green);
+  letter-spacing:.1em;text-transform:uppercase;background:rgba(16,185,129,.06);
+  margin-bottom:2rem;
+  opacity:0;animation:fu .6s ease .4s forwards;
+}
+.hero-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);animation:pulse 2s ease-in-out infinite}
+
+.hero-name{
+  font-family:var(--fc);font-weight:800;
+  font-size:clamp(3rem,8vw,6.5rem);
+  line-height:.95;letter-spacing:-.01em;
+  color:var(--ink);
+  opacity:0;animation:fu .7s ease .55s forwards;
+}
+.hero-name .grad{
+  background:linear-gradient(130deg, var(--cyan) 0%, var(--blue) 40%, var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-role{
+  font-family:var(--fb);font-weight:300;font-style:italic;
+  font-size:clamp(.9rem,2vw,1.15rem);
+  color:var(--ink2);margin-top:.7rem;
+  font-family:var(--fs);
+  opacity:0;animation:fu .6s ease .75s forwards;
+}
+
+.hero-sub{
+  font-size:var(--base);color:var(--ink2);
+  max-width:520px;margin:1.25rem auto 0;
+  font-weight:300;line-height:1.75;
+  opacity:0;animation:fu .6s ease .9s forwards;
+}
+
+.hero-chips{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  margin:2rem auto 0;max-width:560px;
+  opacity:0;animation:fu .6s ease 1.05s forwards;
+}
+
+.chip{
+  padding:4px 12px;border-radius:100px;font-size:11px;
+  font-family:var(--fm);border:1px solid;letter-spacing:.03em;
+  font-weight:500;transition:transform .15s,box-shadow .15s;
+}
+.chip:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.chip-blue{border-color:rgba(59,130,246,.32);color:#93c5fd;background:rgba(59,130,246,.07)}
+.chip-cyan{border-color:rgba(56,189,248,.32);color:var(--cyan);background:rgba(56,189,248,.07)}
+.chip-green{border-color:rgba(16,185,129,.32);color:var(--green);background:rgba(16,185,129,.07)}
+.chip-purple{border-color:rgba(167,139,250,.32);color:var(--purple);background:rgba(167,139,250,.07)}
+.chip-gold{border-color:rgba(251,191,36,.32);color:var(--gold);background:rgba(251,191,36,.07)}
+
+.hero-socials{
+  display:flex;gap:10px;justify-content:center;margin-top:2rem;
+  opacity:0;animation:fu .6s ease 1.2s forwards;
+}
+
+.social-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 20px;border-radius:var(--radius-sm);
+  font-family:var(--fm);font-size:11.5px;font-weight:500;
+  letter-spacing:.05em;text-decoration:none;
+  border:1px solid var(--border2);background:rgba(59,130,246,.05);
+  color:var(--ink2);transition:all .2s ease;
+}
+.social-btn:hover{color:#fff;border-color:var(--blue);background:rgba(59,130,246,.13);transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.17)}
+.social-btn svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--fm);font-size:var(--xs);letter-spacing:var(--lsc);
+  text-transform:uppercase;color:var(--dim);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fi .5s ease 1.8s forwards;
+}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--border2),transparent);animation:scanline 2s ease-in-out infinite}
+
+/* ─── MAIN CONTENT ─── */
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+/* ─── NAV TOP BAR — always fixed at top ─── */
+nav.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  background:rgba(8,9,14,.92);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1100px;margin:0 auto;padding:0 1.5rem;gap:1rem}
+.nav-logo{font-family:var(--fc);font-weight:700;font-size:var(--sm);letter-spacing:var(--lsc);text-transform:uppercase;color:var(--ink);text-decoration:none;flex-shrink:0}
+.nav-logo span{color:var(--blue)}
+
+/* Desktop nav links */
+.nav-links{display:flex;gap:1.75rem;list-style:none;flex:1;justify-content:center}
+.nav-links a{color:var(--dim);text-decoration:none;font-family:var(--fm);font-size:var(--xs);letter-spacing:var(--lsw);text-transform:uppercase;transition:color .2s;position:relative;white-space:nowrap}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--blue);transition:width .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+/* Right side: lang + hamburger */
+.nav-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+
+/* ─── LANG SWITCHER ─── */
+.lang-switcher{display:flex;align-items:center;gap:2px;background:rgba(59,130,246,.05);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px}
+.lang-btn{font-family:var(--fm);font-size:10px;font-weight:500;letter-spacing:.08em;padding:3px 9px;border-radius:5px;border:none;cursor:pointer;transition:all .2s;background:transparent;color:var(--dim)}
+.lang-btn.active{background:var(--blue);color:#fff;font-weight:600;box-shadow:0 0 10px rgba(59,130,246,.38)}
+.lang-btn:hover:not(.active){color:var(--ink);background:rgba(59,130,246,.09)}
+
+/* ─── HAMBURGER ─── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:transparent;border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;cursor:pointer;transition:border-color .2s;flex-shrink:0}
+.hamburger span{display:block;height:1px;background:var(--ink2);border-radius:2px;transition:all .3s ease;transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hamburger:hover{border-color:var(--border2)}
+
+/* ─── MOBILE DRAWER ─── */
+.mobile-menu{
+  display:none;
+  position:fixed;top:56px;left:0;right:0;z-index:499;
+  background:rgba(8,9,14,.97);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  padding:1rem 1.5rem 1.5rem;
+  flex-direction:column;gap:.25rem;
+  transform:translateY(-8px);opacity:0;
+  transition:opacity .25s ease,transform .25s ease;
+  pointer-events:none;
+}
+.mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
+.mobile-menu a{
+  display:block;padding:.75rem .5rem;
+  font-family:var(--fm);font-size:var(--xs);letter-spacing:var(--lsc);
+  text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid var(--border);transition:color .2s,padding-left .2s;
+}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--ink);padding-left:1rem}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:flex}
+}
+@media(min-width:769px){
+  .mobile-menu{display:none!important}
+}
+
+/* ─── SECTIONS ─── */
+.section{padding:4rem 0;border-top:1px solid var(--border)}
+
+.section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap}
+.section-num{font-family:var(--fm);font-size:10px;color:var(--blue);letter-spacing:.14em;border:1px solid var(--border);padding:3px 9px;border-radius:var(--radius-sm);background:rgba(59,130,246,.05);flex-shrink:0}
+.section-title{font-family:var(--fc);font-weight:700;font-size:clamp(1rem,3.5vw,1.45rem);letter-spacing:-.01em;color:var(--ink)}
+.section-line{flex:1;min-width:30px;height:1px;background:linear-gradient(90deg,var(--border2) 0%,transparent 100%)}
+
+/* ─── PROJECT CARDS ─── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(480px,100%),1fr));gap:1.1rem}
+
+.card{
+  background:rgba(13,16,24,.72);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  position:relative;overflow:hidden;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,box-shadow .22s ease;
+  cursor:none;
+  opacity:0;
+  animation:fadeUp .55s ease both;
+}
+@media(hover:none),(pointer:coarse){.card{cursor:auto}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cat-color,var(--blue)),transparent 70%);opacity:.9}
+.card:hover{transform:translateY(-4px);border-color:var(--border2);background:rgba(20,24,38,.88);box-shadow:0 12px 42px rgba(0,0,0,.38),0 0 0 1px rgba(59,130,246,.07)}
+.card:nth-child(1){animation-delay:.07s}
+.card:nth-child(2){animation-delay:.14s}
+.card:nth-child(3){animation-delay:.21s}
+.card:nth-child(4){animation-delay:.28s}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;margin-bottom:.9rem}
+.card-category{font-family:var(--fm);font-size:10px;color:var(--cat-color,var(--blue));text-transform:uppercase;letter-spacing:.12em;margin-bottom:5px;opacity:.9}
+.card-title{font-family:var(--fc);font-weight:700;font-size:1.02rem;line-height:1.3;color:var(--ink)}
+.card-icon{font-size:1.35rem;flex-shrink:0;margin-top:2px;opacity:.72}
+.card-divider{height:1px;background:var(--border);margin:.9rem 0}
+
+.card-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.card-bullets li{display:flex;gap:9px;font-size:13px;color:var(--ink2);line-height:1.65}
+.card-bullets li::before{content:'›';color:var(--cat-color,var(--blue));flex-shrink:0;font-size:15px;font-weight:600;line-height:1.55}
+
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--border)}
+.tag{font-family:var(--fm);font-size:10px;padding:3px 8px;border-radius:var(--radius-sm);background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.13);color:var(--dim);letter-spacing:.03em}
+
+.card-footer{display:flex;align-items:center;justify-content:flex-end;margin-top:.9rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.card-github-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--radius-sm);font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.05em;text-decoration:none;border:1px solid var(--border);background:transparent;color:var(--dim);transition:all .2s;cursor:pointer}
+.card-github-btn:hover{color:var(--ink);border-color:var(--border2);background:rgba(59,130,246,.07)}
+.card-github-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+
+.card-full{grid-column:1/-1}
+
+/* ─── SKILLS ─── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem}
+.skill-group{background:rgba(13,16,24,.72);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;transition:border-color .2s,background .2s}
+.skill-group:hover{border-color:var(--border2);background:rgba(20,24,38,.88)}
+.skill-group-title{font-family:var(--fm);font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.75rem}
+.skill-items{display:flex;flex-wrap:wrap;gap:5px}
+.skill-item{font-size:11.5px;color:var(--ink2);background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.1);padding:2px 8px;border-radius:var(--radius-sm)}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--border);padding:2.5rem 0;text-align:center;color:var(--dim);font-family:var(--fm);font-size:12px}
+footer strong{color:var(--ink);font-family:var(--fc);font-weight:600;letter-spacing:.04em}
+.foot-links{display:flex;justify-content:center;gap:16px;margin-top:.75rem;flex-wrap:wrap}
+.foot-link{color:var(--dim);text-decoration:none;font-size:11.5px;letter-spacing:.05em;transition:color .2s}
+.foot-link:hover{color:var(--blue)}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.show{opacity:1;transform:none}
+
+/* ══════════════════════════════════
+   MOBILE OVERRIDES  ≤ 768px
+══════════════════════════════════ */
+@media(max-width:768px){
+  /* Hero */
+  #hero{padding-top:56px}
+  .hero-hud-top{padding:1rem 1.25rem}
+  .hero-center{padding:0 1.25rem}
+  .hero-name{font-size:clamp(2.4rem,13vw,4rem)}
+  .hero-sub{font-size:.9rem}
+  .hero-chips{gap:5px}
+  .chip{font-size:10.5px;padding:3px 10px}
+  .hero-socials{flex-wrap:wrap;gap:8px}
+  .social-btn{font-size:11px;padding:7px 16px}
+
+  /* Wrap */
+  .wrap{padding:0 1rem}
+
+  /* Sections */
+  .section{padding:3rem 0}
+  .section-header{gap:.6rem}
+
+  /* Cards */
+  .card{padding:1.25rem}
+  .card-bullets li{font-size:12.5px}
+  .card-title{font-size:.97rem}
+  .card-full{grid-column:1}
+
+  /* Skills */
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Footer */
+  footer{padding:2rem 1rem;font-size:11.5px}
+}
+
+@media(max-width:480px){
+  .hero-name{font-size:clamp(2rem,12vw,3rem)}
+  .hero-role{font-size:.9rem}
+  .skills-grid{grid-template-columns:1fr}
+  .hero-badge{font-size:.6rem}
+}
+
+</style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="#">YBT — <span>Portfolio</span></a>
-      <ul class="nav-links">
-        <li><a href="#streaming" data-i18n="nav.data">Data Engineering</a></li>
-        <li><a href="#ai" data-i18n="nav.ai">IA & Agents</a></li>
-        <li><a href="#ml" data-i18n="nav.ml">Machine Learning</a></li>
-        <li><a href="#backend" data-i18n="nav.skills">Stack Technique</a></li>
-      </ul>
-      <!-- Language switcher -->
+<!-- CUSTOM CURSOR -->
+<div id="cur"></div>
+<div id="curring"></div>
+
+<!-- PROGRESS BAR -->
+<div id="prog"></div>
+
+<!-- SIDE NAV DOTS -->
+<nav id="nav" aria-label="Section navigation">
+  <div class="nd" data-s="0" data-label="Home"></div>
+  <div class="nd" data-s="1" data-label="Data Eng."></div>
+  <div class="nd" data-s="2" data-label="AI &amp; Agents"></div>
+  <div class="nd" data-s="3" data-label="Machine Learning"></div>
+  <div class="nd" data-s="4" data-label="Software Eng."></div>
+  <div class="nd" data-s="5" data-label="Tech Stack"></div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" data-s="0">
+  <div class="hero-bg-glow"></div>
+
+  <div class="hero-hud-top">
+    <div class="hud-brand">
+      <span class="hud-name"><strong>YBT</strong> · PORTFOLIO</span>
+      <span class="hud-tag">v2025</span>
+    </div>
+    <div class="hud-links">
+      <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener" class="hud-link">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener" class="hud-link">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-badge">Available · Open to opportunities</div>
+    <h1 class="hero-name">Yassine<br><span class="grad">Ben Terras</span></h1>
+    <p class="hero-role">Data Engineer &amp; AI</p>
+    <p class="hero-sub" data-i18n="hero.sub">Real-time pipelines, event-driven architectures, multi-agent systems and production-grade Machine Learning — from prototype to production.</p>
+    <div class="hero-chips">
+      <span class="chip chip-cyan">Kafka</span>
+      <span class="chip chip-blue">Spark</span>
+      <span class="chip chip-green">Python</span>
+      <span class="chip chip-cyan">dbt</span>
+      <span class="chip chip-cyan">SQL</span>
+      <span class="chip chip-purple">LangGraph</span>
+      <span class="chip chip-blue">Kubernetes</span>
+      <span class="chip chip-gold">Azure</span>
+      <span class="chip chip-cyan">Databricks</span>
+      <span class="chip chip-cyan">Fabric</span>
+    </div>
+    <div class="hero-socials">
+      <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener noreferrer" class="social-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener noreferrer" class="social-btn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+
+
+</section>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav class="topbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">YBT — <span>Portfolio</span></a>
+    <ul class="nav-links">
+      <li><a href="#streaming" data-i18n="nav.data">Data Engineering</a></li>
+      <li><a href="#ai" data-i18n="nav.ai">AI &amp; Agents</a></li>
+      <li><a href="#ml" data-i18n="nav.ml">Machine Learning</a></li>
+      <li><a href="#dev" data-i18n="nav.dev">Software Eng.</a></li>
+      <li><a href="#backend" data-i18n="nav.skills">Tech Stack</a></li>
+    </ul>
+    <div class="nav-right">
       <div class="lang-switcher" role="group" aria-label="Language switcher">
         <button class="lang-btn" id="btn-fr" onclick="setLang('fr')" aria-pressed="false">FR</button>
         <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
       </div>
+      <button class="hamburger" id="ham" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- HERO -->
+<!-- Mobile drawer -->
+<div class="mobile-menu" id="mob-menu">
+  <a href="#streaming" data-i18n="nav.data">Data Engineering</a>
+  <a href="#ai" data-i18n="nav.ai">AI &amp; Agents</a>
+  <a href="#ml" data-i18n="nav.ml">Machine Learning</a>
+  <a href="#dev" data-i18n="nav.dev">Software Eng.</a>
+  <a href="#backend" data-i18n="nav.skills">Tech Stack</a>
+</div>
+
+<div class="wrap">
+
+  <!-- ═══ DATA ENGINEERING ═══ -->
+  <section class="section reveal" id="streaming" data-s="1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title" data-i18n="s1.title">Data Engineering — Streaming &amp; Pipelines</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Flight Tracking -->
+      <div class="card" style="--cat-color:#38bdf8">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.vols.cat">Streaming · Hybrid ELT</div>
+            <div class="card-title" data-i18n="c.vols.title">Real-Time Flight Tracking Pipeline</div>
+          </div>
+          <div class="card-icon">✈️</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.vols.b1">Designed an end-to-end ELT pipeline for real-time ingestion of global flight telemetry (OpenSky Network), separating low-latency streaming from analytical batch processing</li>
+          <li data-i18n="c.vols.b2">Implemented a dual-write strategy to PostgreSQL (dbt dimensional models) and Cassandra (high-frequency time series) based on access profiles</li>
+          <li data-i18n="c.vols.b3">Orchestrated the stack with Airflow (containerised DAGs) and exposed airport congestion KPIs in real-time Grafana dashboards</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">Kafka · Zookeeper</span>
+          <span class="tag">Spark (PySpark)</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Cassandra</span>
+          <span class="tag">dbt</span>
+          <span class="tag">Airflow</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">Docker Compose</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/flight-tracking-pipeline" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Banking Fraud Detection -->
+      <div class="card" style="--cat-color:#fb7185">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.fraud.cat">ML Production · Anomaly Detection</div>
+            <div class="card-title" data-i18n="c.fraud.title">Real-Time Banking Fraud Detection</div>
+          </div>
+          <div class="card-icon">🔍</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.fraud.b1">Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:#34d399">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)</li>
+          <li data-i18n="c.fraud.b2">Deployed a real-time inference API (FastAPI, Docker) serving predictions with &lt;50ms latency, with model registration via MLflow</li>
+          <li data-i18n="c.fraud.b3">Automated drift monitoring (Evidently AI) and production performance dashboard with distribution drift alerts</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">XGBoost · LightGBM</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">MLflow</span>
+          <span class="tag">Evidently AI</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">SMOTE</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/YassineBentTerras/banking-fraud-detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ AI & AGENTS ═══ -->
+  <section class="section reveal" id="ai" data-s="2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title" data-i18n="s2.title">AI &amp; Multi-Agent Systems</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- MAS Sentinel -->
+      <div class="card" style="--cat-color:#a78bfa">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.mas.cat">Multi-Agent · AI Monitoring</div>
+            <div class="card-title" data-i18n="c.mas.title">MAS Pipeline Sentinel — Silent Failure Detection</div>
+          </div>
+          <div class="card-icon">🛡️</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.mas.b1">Architected an autonomous system of 5 AI agents (LangGraph + Claude) detecting silent failures invisible to classical monitoring tools — pipeline correct but data incorrect</li>
+          <li data-i18n="c.mas.b2">Each agent covers a distinct domain (z-score, schema drift, dbt quality, DAG blast, remediation) via 5 Kafka topics with sliding-window correlation of 5 min</li>
+          <li data-i18n="c.mas.b3">Delivered with 188 unit tests, 4 operating modes (shadow → autonomous) and PagerDuty, Slack, Jira integrations on AWS ECS Fargate</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">LangGraph</span>
+          <span class="tag">Claude Sonnet/Haiku</span>
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">PostgreSQL · dbt</span>
+          <span class="tag">AWS ECS Fargate</span>
+          <span class="tag">pytest (188 tests)</span>
+          <span class="tag">PagerDuty · Slack</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/Multi-Agent-System-for-Data-Pipeline-Silent-Failure-Detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- CloudSense FinOps -->
+      <div class="card" style="--cat-color:#60a5fa">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.finops.cat">Multi-Agent · FinOps · Cloud Cost</div>
+            <div class="card-title" data-i18n="c.finops.title">CloudSense ⚡ — Autonomous FinOps Multi-Agent Platform</div>
+          </div>
+          <div class="card-icon">☁️</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.finops.b1">Built an open-source production-grade FinOps platform normalising billing data from AWS, Azure &amp; GCP into a unified FOCUS 1.0 schema, streaming all cost events through Kafka KRaft (ZooKeeper-free) and storing them in ClickHouse for sub-second OLAP queries at hundreds of millions of rows</li>
+          <li data-i18n="c.finops.b2">Engineered a LangGraph supervisor orchestrating specialist AI agents (per cloud) that analyse billing data via ClickHouse queries, producing quantified CostInsight objects synthesised into prioritised RecommendationResult objects with projected savings and risk levels</li>
+          <li data-i18n="c.finops.b3">Enforced autonomous action safety via OPA policy gating and delivered interactive approve/reject recommendations to Slack; exposed cost overview, drill-down and team allocation through a FastAPI REST API</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">LangGraph</span>
+          <span class="tag">Kafka KRaft</span>
+          <span class="tag">ClickHouse</span>
+          <span class="tag">FOCUS 1.0</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">OPA</span>
+          <span class="tag">AWS · Azure · GCP</span>
+          <span class="tag">Python</span>
+          <span class="tag">Slack</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/Autonomous-FinOps-Multi-Agent-Platform" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ MACHINE LEARNING ═══ -->
+  <section class="section reveal" id="ml" data-s="3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title" data-i18n="s3.title">Machine Learning &amp; Data Science</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Student Performance -->
+      <div class="card" style="--cat-color:#38bdf8">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.student.cat">Data Mining · Prediction</div>
+            <div class="card-title" data-i18n="c.student.title">Student Performance — Data Mining &amp; Prediction</div>
+          </div>
+          <div class="card-icon">🎓</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.student.b1">Analysed a dataset of 25,000 students × 16 variables: full EDA (univariate, bivariate), PCA for dimensionality reduction, association rules (Lift = 3.14)</li>
+          <li data-i18n="c.student.b2">Trained and compared Decision Tree vs. Random Forest — Random Forest model selected with 75% accuracy; study hours identified as the primary factor</li>
+          <li data-i18n="c.student.b3">Validated internal data consistency via Cronbach's Alpha; finding that low study time + average attendance systematically leads to poor performance</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">Python 3</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">Pandas · NumPy</span>
+          <span class="tag">Matplotlib · Seaborn</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">PCA</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/student-performance-data-mining" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- DS Exploration — full width -->
+      <div class="card" style="--cat-color:#a78bfa">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.ds.cat">Data Science · Clustering · Classification · Association Rules</div>
+            <div class="card-title" data-i18n="c.ds.title">Exploration, Classification, Clustering &amp; Association Rules</div>
+          </div>
+          <div class="card-icon">🔬</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.ds.b1">Conducted advanced exploratory analysis on two datasets (Mall_Customers, heart.csv): cleaning, descriptive statistics and multi-dimensional correlation visualisations</li>
+          <li data-i18n="c.ds.b2">Applied supervised classification on medical data (heart.csv) — Logistic Regression evaluated with confusion matrices and performance metrics</li>
+          <li data-i18n="c.ds.b3">Segmented mall customers via unsupervised clustering (BIRCH algorithm), revealing distinct groups by Income / Spending Score profile</li>
+          <li data-i18n="c.ds.b4">Extracted association rules through data mining (frequent itemsets) to identify underlying behaviours and recurring purchase patterns</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">Python 3</span>
+          <span class="tag">Pandas · NumPy</span>
+          <span class="tag">Scikit-Learn</span>
+          <span class="tag">Matplotlib · Seaborn</span>
+          <span class="tag">BIRCH Clustering</span>
+          <span class="tag">Logistic Regression</span>
+          <span class="tag">Association Rules</span>
+          <span class="tag">Jupyter Notebooks</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/data-insights" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ DEV ═══ -->
+  <section class="section reveal" id="dev" data-s="4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title" data-i18n="s4.title">Software Engineering &amp; Architecture</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Planify -->
+      <div class="card" style="--cat-color:#fbbf24">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.tt.cat">Optimization · Algorithms</div>
+            <div class="card-title" data-i18n="c.tt.title">Intelligent Timetabling Optimization System — Planify</div>
+          </div>
+          <div class="card-icon">🗓️</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.tt.b1">Designed a full-stack automated timetable generation system for higher education institutions, automating complex scheduling using constraint programming and SAT techniques (OR-Tools MaxSAT) to produce conflict-free timetables</li>
+          <li data-i18n="c.tt.b2">Built an advanced optimization engine handling professor availability, room capacities, session types, and working hours — with secure Spring Security + JWT auth, Excel bulk import (Apache POI), and automated PDF export</li>
+          <li data-i18n="c.tt.b3">Monorepo architecture with Vue 3 + Vite + TypeScript + Pinia frontend and Spring Boot + JPA backend; MaxSAT solver enforcing hard constraints and optimizing soft preferences for an efficient, conflict-free result</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">Java · Spring Boot</span>
+          <span class="tag">Google OR-Tools MaxSAT</span>
+          <span class="tag">Vue 3 · TypeScript</span>
+          <span class="tag">Vite · Pinia</span>
+          <span class="tag">Spring Security + JWT</span>
+          <span class="tag">Apache POI</span>
+          <span class="tag">PostgreSQL / MySQL</span>
+          <span class="tag">SAT Solving</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/Intelligent-Timetabling-Optimization-System" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Medical Cabinet EDA -->
+      <div class="card" style="--cat-color:#34d399">
+        <div class="card-top">
+          <div>
+            <div class="card-category" data-i18n="c.med.cat">Event-Driven · Microservices</div>
+            <div class="card-title" data-i18n="c.med.title">Medical Practice Management — EDA Architecture</div>
+          </div>
+          <div class="card-icon">🏥</div>
+        </div>
+        <div class="card-divider"></div>
+        <ul class="card-bullets">
+          <li data-i18n="c.med.b1">Migrated a synchronous REST architecture (tight coupling, error cascades) to a Kafka EDA architecture, decoupling 5 autonomous microservices</li>
+          <li data-i18n="c.med.b2">Implemented the Publish/Subscribe pattern with a distributed choreography saga (patient, doctor, appointment, consultation, billing) — eventual consistency guaranteed</li>
+          <li data-i18n="c.med.b3">Deployed the infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) with exclusively event-driven communication between services</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Docker Compose</span>
+          <span class="tag">Kafka UI · AKHQ</span>
+          <span class="tag">Microservices</span>
+          <span class="tag">Java</span>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/Yassine-Ben-Terras/Event-driven-architecture-Cabinet-Medical" target="_blank" rel="noopener noreferrer" class="card-github-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <section class="section reveal" id="backend" data-s="5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title" data-i18n="s5.title">Technical Stack</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.cloud">Cloud &amp; Platforms</div>
+        <div class="skill-items">
+          <span class="skill-item">Azure</span>
+          <span class="skill-item">Fabric</span>
+          <span class="skill-item">Databricks</span>
+          <span class="skill-item">OpenStack</span>
+          <span class="skill-item">OpenShift</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.de">Data Engineering</div>
+        <div class="skill-items">
+          <span class="skill-item">Kafka</span>
+          <span class="skill-item">Spark</span>
+          <span class="skill-item">dbt</span>
+          <span class="skill-item">Airflow</span>
+          <span class="skill-item">Cassandra</span>
+          <span class="skill-item">ETL/ELT</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.devops">DevOps &amp; CI/CD</div>
+        <div class="skill-items">
+          <span class="skill-item">Kubernetes</span>
+          <span class="skill-item">Docker</span>
+          <span class="skill-item">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.ml">Machine Learning</div>
+        <div class="skill-items">
+          <span class="skill-item">XGBoost</span>
+          <span class="skill-item">LightGBM</span>
+          <span class="skill-item">MLflow</span>
+          <span class="skill-item">Scikit-Learn</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.ai">AI &amp; Agents</div>
+        <div class="skill-items">
+          <span class="skill-item">LangGraph</span>
+          <span class="skill-item">Claude API</span>
+          <span class="skill-item">RAG</span>
+          <span class="skill-item">LLM Agents</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title" data-i18n="sk.prog">Programming</div>
+        <div class="skill-items">
+          <span class="skill-item">Python</span>
+          <span class="skill-item">SQL</span>
+          <span class="skill-item">Java</span>
+          <span class="skill-item">Spring Boot</span>
+          <span class="skill-item">FastAPI</span>
+          <span class="skill-item">TypeScript</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+
+<footer>
   <div class="wrap">
-    <section class="hero">
-      <div class="hero-badge" data-i18n="hero.badge">Disponible · Open to opportunities</div>
-      <h1>Yassine Ben Terras<br /><span>Data Engineer & AI</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">Pipelines temps réel, architectures event-driven, systèmes multi-agents
-        et Machine Learning
-        production-grade — du prototype à la mise en production.</p>
-      <div class="hero-chips">
-        <span class="chip chip-cyan">Kafka</span>
-        <span class="chip chip-blue">Spark</span>
-        <span class="chip chip-green">Python</span>
-        <span class="chip chip-cyan">dbt</span>
-        <span class="chip chip-cyan">SQL</span>
-        <span class="chip chip-purple">LangGraph</span>
-        <span class="chip chip-blue">Kubernetes</span>
-        <span class="chip chip-gold">Azure</span>
-        <span class="chip chip-cyan">Databricks</span>
-        <span class="chip chip-cyan">Microsoft Fabric</span>
-      </div>
-
-      <!-- Social Links -->
-      <div class="social-links">
-        <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener noreferrer" class="social-btn">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener noreferrer" class="social-btn">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </section>
-
-    <!-- ═══ STREAMING & DATA ENG ═══ -->
-    <section class="section" id="streaming">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2 class="section-title" data-i18n="s1.title">Data Engineering — Streaming & Pipelines</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-
-        <!-- Vols temps réel -->
-        <div class="card" style="--cat-color: #38bdf8;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.vols.cat">Streaming · ELT Hybride</div>
-              <div class="card-title" data-i18n="c.vols.title">Pipeline Suivi de Vols en Temps Réel</div>
-            </div>
-            <div class="card-icon">✈️</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.vols.b1">Conçu un pipeline ELT bout-en-bout pour l'ingestion temps réel de télémétrie de
-              vols mondiaux (OpenSky Network), séparant streaming bas-latence et batch analytique</li>
-            <li data-i18n="c.vols.b2">Implémenté une stratégie dual-write vers PostgreSQL (modèles dbt dimensionnels) et
-              Cassandra (séries temporelles haute-fréquence) selon le profil d'accès</li>
-            <li data-i18n="c.vols.b3">Orchestré la stack via Airflow (DAGs containerisés) et exposé les KPIs de
-              congestion aéroportuaire dans des dashboards Grafana temps réel</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">Kafka · Zookeeper</span>
-            <span class="tag">Spark (PySpark)</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Cassandra</span>
-            <span class="tag">dbt</span>
-            <span class="tag">Airflow</span>
-            <span class="tag">Grafana</span>
-            <span class="tag">Docker Compose</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/flight-tracking-pipeline" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <!-- Cabinet Médical EDA -->
-        <div class="card" style="--cat-color: #34d399;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.med.cat">Event-Driven · Microservices</div>
-              <div class="card-title" data-i18n="c.med.title">Gestion Cabinet Médical — Architecture EDA</div>
-            </div>
-            <div class="card-icon">🏥</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.med.b1">Migré une architecture REST synchrone (couplage fort, cascades d'erreurs) vers une
-              architecture EDA Kafka, découplant 5 microservices autonomes</li>
-            <li data-i18n="c.med.b2">Implémenté le pattern Publish/Subscribe avec saga distribuée par chorégraphie
-              (patient, médecin, rendez-vous, consultation, billing) — consistance éventuelle garantie</li>
-            <li data-i18n="c.med.b3">Déployé l'infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) avec
-              communication exclusivement événementielle entre services</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">Apache Kafka</span>
-            <span class="tag">Spring Boot</span>
-            <span class="tag">Docker Compose</span>
-            <span class="tag">Kafka UI · AKHQ</span>
-            <span class="tag">Microservices</span>
-            <span class="tag">Java</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/Event-driven-architecture-Cabinet-Medical" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══ IA & AGENTS ═══ -->
-    <section class="section" id="ai">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title" data-i18n="s2.title">IA & Systèmes Multi-Agents</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-
-        <!-- MAS Sentinel -->
-        <div class="card" style="--cat-color: #a78bfa;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.mas.cat">Multi-Agent · Monitoring IA</div>
-              <div class="card-title" data-i18n="c.mas.title">MAS Pipeline Sentinel — Détection de Pannes Silencieuses
-              </div>
-            </div>
-            <div class="card-icon">🛡️</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.mas.b1">Architecturé un système autonome de 5 agents IA (LangGraph + Claude) détectant les
-              pannes silencieuses invisibles aux outils de monitoring classiques — pipeline correct mais données
-              incorrectes</li>
-            <li data-i18n="c.mas.b2">Chaque agent couvre un domaine distinct (z-score, dérive de schéma, qualité dbt,
-              blast DAG, remédiation) via 5 topics Kafka avec corrélation en fenêtre glissante de 5 min</li>
-            <li data-i18n="c.mas.b3">Livré avec 188 tests unitaires, 4 modes d'opération (shadow → autonome) et
-              intégrations PagerDuty, Slack, Jira sur AWS ECS Fargate</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">LangGraph</span>
-            <span class="tag">Claude Sonnet/Haiku</span>
-            <span class="tag">Apache Kafka</span>
-            <span class="tag">PostgreSQL · dbt</span>
-            <span class="tag">AWS ECS Fargate</span>
-            <span class="tag">pytest (188 tests)</span>
-            <span class="tag">PagerDuty · Slack</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/Multi-Agent-System-for-Data-Pipeline-Silent-Failure-Detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <!-- Planify — Intelligent Timetabling -->
-        <div class="card" style="--cat-color: #fbbf24;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.tt.cat">Optimisation · Algorithmes</div>
-              <div class="card-title" data-i18n="c.tt.title">Intelligent Timetabling Optimization System — Planify</div>
-            </div>
-            <div class="card-icon">🗓️</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.tt.b1">Conçu un système full-stack de génération automatique d'emplois du temps pour établissements d'enseignement supérieur, automatisant la planification complexe avec programmation par contraintes et SAT (OR-Tools MaxSAT) pour produire des emplois du temps sans conflit</li>
-            <li data-i18n="c.tt.b2">Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification sécurisée Spring Security + JWT, import Excel (Apache POI) et export PDF automatique</li>
-            <li data-i18n="c.tt.b3">Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples pour un résultat optimal</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">Java · Spring Boot</span>
-            <span class="tag">Google OR-Tools MaxSAT</span>
-            <span class="tag">Vue 3 · TypeScript</span>
-            <span class="tag">Vite · Pinia</span>
-            <span class="tag">Spring Security + JWT</span>
-            <span class="tag">Apache POI</span>
-            <span class="tag">PostgreSQL / MySQL</span>
-            <span class="tag">SAT Solving</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/Intelligent-Timetabling-Optimization-System" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══ MACHINE LEARNING ═══ -->
-    <section class="section" id="ml">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title" data-i18n="s3.title">Machine Learning & Data Science</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-
-        <!-- Fraude bancaire -->
-        <div class="card" style="--cat-color: #fb7185;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.fraud.cat">ML Production · Détection d'Anomalies</div>
-              <div class="card-title" data-i18n="c.fraud.title">Détection de Fraude Bancaire en Temps Réel</div>
-            </div>
-            <div class="card-icon">🔍</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.fraud.b1">Conçu un pipeline complet de détection de fraude (ingestion Kafka, feature store,
-              entraînement XGBoost/LightGBM avec SMOTE) — <strong style="color:#34d399;">AUC-PR de 0.94</strong> sur un
-              dataset fortement déséquilibré (0,1% de fraudes)</li>
-            <li data-i18n="c.fraud.b2">Déployé une API d'inférence temps réel (FastAPI, Docker) servant les prédictions
-              avec une latence &lt;50ms, enregistrement des modèles via MLflow</li>
-            <li data-i18n="c.fraud.b3">Monitoring de drift automatisé (Evidently AI) et dashboard de suivi des métriques
-              de performance en production — alertes sur dérive de distribution</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">XGBoost · LightGBM</span>
-            <span class="tag">Kafka</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">MLflow</span>
-            <span class="tag">Evidently AI</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
-            <span class="tag">SMOTE</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/YassineBentTerras/banking-fraud-detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <!-- Student Performance -->
-        <div class="card" style="--cat-color: #38bdf8;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.student.cat">Data Mining · Prédiction</div>
-              <div class="card-title" data-i18n="c.student.title">Student Performance — Data Mining & Prediction</div>
-            </div>
-            <div class="card-icon">🎓</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.student.b1">Analysé un dataset de 25 000 étudiants × 16 variables : EDA complète
-              (univariée, bivariée), ACP pour réduction de dimensionnalité, règles d'association (Lift = 3.14)</li>
-            <li data-i18n="c.student.b2">Entraîné et comparé Decision Tree vs Random Forest — modèle Random Forest
-              retenu avec une précision de 75% ; identification des heures d'étude comme facteur principal</li>
-            <li data-i18n="c.student.b3">Validé la cohérence interne des données par l'Alpha de Cronbach ; découverte
-              que faible temps d'étude + assiduité moyenne conduit systématiquement à une performance faible</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">Python 3</span>
-            <span class="tag">Scikit-Learn</span>
-            <span class="tag">Pandas · NumPy</span>
-            <span class="tag">Matplotlib · Seaborn</span>
-            <span class="tag">Random Forest</span>
-            <span class="tag">ACP</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/student-performance-data-mining" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <!-- Data Science exploration -->
-        <div class="card card-full" style="--cat-color: #a78bfa;">
-          <div class="card-top">
-            <div>
-              <div class="card-category" data-i18n="c.ds.cat">Data Science · Clustering · Classification · Association
-                Rules</div>
-              <div class="card-title" data-i18n="c.ds.title">Exploration, Classification, Clustering & Règles
-                d'Association</div>
-            </div>
-            <div class="card-icon">🔬</div>
-          </div>
-          <div class="card-divider"></div>
-          <ul class="card-bullets">
-            <li data-i18n="c.ds.b1">Réalisé une analyse exploratoire avancée sur deux datasets (Mall_Customers,
-              heart.csv) : nettoyage, statistiques descriptives et visualisations multi-dimensionnelles des corrélations
-            </li>
-            <li data-i18n="c.ds.b2">Appliqué la classification supervisée sur données médicales (heart.csv) — Régression
-              Logistique avec évaluation par matrices de confusion et métriques de performance</li>
-            <li data-i18n="c.ds.b3">Segmenté les clients d'un centre commercial via clustering non supervisé (algorithme
-              BIRCH) révélant des groupes distincts par profil Revenu / Score de dépense</li>
-            <li data-i18n="c.ds.b4">Extrait des règles d'association par fouille de données (itemsets fréquents) pour
-              identifier des comportements sous-jacents et patterns d'achat récurrents</li>
-          </ul>
-          <div class="card-tags">
-            <span class="tag">Python 3</span>
-            <span class="tag">Pandas · NumPy</span>
-            <span class="tag">Scikit-Learn</span>
-            <span class="tag">Matplotlib · Seaborn</span>
-            <span class="tag">BIRCH Clustering</span>
-            <span class="tag">Logistic Regression</span>
-            <span class="tag">Association Rules</span>
-            <span class="tag">Jupyter Notebooks</span>
-          </div>
-          <div class="card-footer">
-            <a href="https://github.com/Yassine-Ben-Terras/data-insights" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══ STACK TECHNIQUE ═══ -->
-    <section class="section" id="backend">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2 class="section-title" data-i18n="s4.title">Stack Technique</h2>
-        <div class="section-line"></div>
-      </div>
-      <!-- FIX : tous les skill-groups sont maintenant frères au même niveau -->
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <div class="skill-group-title" data-i18n="sk.cloud">Cloud & Plateformes</div>
-          <div class="skill-items">
-            <span class="skill-item">Azure</span>
-            <span class="skill-item">Fabric</span>
-            <span class="skill-item">Databricks</span>
-            <span class="skill-item">OpenStack</span>
-            <span class="skill-item">OpenShift</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title" data-i18n="sk.de">Data Engineering</div>
-          <div class="skill-items">
-            <span class="skill-item">Kafka</span>
-            <span class="skill-item">Spark</span>
-            <span class="skill-item">dbt</span>
-            <span class="skill-item">Airflow</span>
-            <span class="skill-item">Cassandra</span>
-            <span class="skill-item">ETL/ELT</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title" data-i18n="sk.devops">DevOps & CI/CD</div>
-          <div class="skill-items">
-            <span class="skill-item">Kubernetes</span>
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">CI/CD</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title" data-i18n="sk.ml">Machine Learning</div>
-          <div class="skill-items">
-            <span class="skill-item">XGBoost</span>
-            <span class="skill-item">LightGBM</span>
-            <span class="skill-item">MLflow</span>
-            <span class="skill-item">Scikit-Learn</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title" data-i18n="sk.prog">Programmation</div>
-          <div class="skill-items">
-            <span class="skill-item">Python</span>
-            <span class="skill-item">SQL</span>
-            <span class="skill-item">Java</span>
-            <span class="skill-item">Spring Boot</span>
-            <span class="skill-item">FastAPI</span>
-            <span class="skill-item">TypeScript</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </div><!-- /wrap -->
-
-  <footer>
-    <div class="wrap">
-      <strong>Yassine Ben Terras</strong> · Data Engineer &amp; AI · Rabat, Maroc · yassine.benterras02@gmail.com
-      <div style="display:flex;justify-content:center;gap:16px;margin-top:0.75rem;">
-        <a href="https://github.com/YassineBentTerras" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:0.05em;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/yassine-ben-terras" target="_blank" rel="noopener noreferrer" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:0.05em;transition:color .2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">LinkedIn ↗</a>
-      </div>
+    <strong>Yassine Ben Terras</strong> · Data Engineer &amp; AI · Rabat, Maroc · yassine.benterras02@gmail.com
+    <div class="foot-links">
+      <a href="https://github.com/YassineBentTerras" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/yassine-ben-terras" target="_blank" rel="noopener noreferrer" class="foot-link">LinkedIn ↗</a>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <!-- ══════════════════════════════════
-       TRADUCTIONS / TRANSLATIONS
-  ═══════════════════════════════════ -->
-  <script>
-    const translations = {
-      fr: {
-        /* Nav */
-        'nav.data': 'Data Engineering',
-        'nav.ai': 'IA & Agents',
-        'nav.ml': 'Machine Learning',
-        'nav.skills': 'Stack Technique',
+<script>
+/* ─── CUSTOM CURSOR (desktop only) ─── */
+const hasFinePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(hasFinePointer){
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('curring');
+  let mx = -100, my = -100, rx = -100, ry = -100;
 
-        /* Hero */
-        'hero.badge': 'Disponible · Open to opportunities',
-        'hero.sub': 'Pipelines temps réel, architectures event-driven, systèmes multi-agents et Machine Learning production-grade — du prototype à la mise en production.',
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx+'px'; cur.style.top = my+'px';
+  }, {passive:true});
 
-        /* Section titles */
-        's1.title': 'Data Engineering — Streaming & Pipelines',
-        's2.title': 'IA & Systèmes Multi-Agents',
-        's3.title': 'Machine Learning & Data Science',
-        's4.title': 'Stack Technique',
+  (function ringLoop(){
+    rx += (mx - rx) * .14;
+    ry += (my - ry) * .14;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(ringLoop);
+  })();
 
-        /* Card: Vols */
-        'c.vols.cat': 'Streaming · ELT Hybride',
-        'c.vols.title': 'Pipeline Suivi de Vols en Temps Réel',
-        'c.vols.b1': "Conçu un pipeline ELT bout-en-bout pour l'ingestion temps réel de télémétrie de vols mondiaux (OpenSky Network), séparant streaming bas-latence et batch analytique",
-        'c.vols.b2': 'Implémenté une stratégie dual-write vers PostgreSQL (modèles dbt dimensionnels) et Cassandra (séries temporelles haute-fréquence) selon le profil d\'accès',
-        'c.vols.b3': 'Orchestré la stack via Airflow (DAGs containerisés) et exposé les KPIs de congestion aéroportuaire dans des dashboards Grafana temps réel',
+  document.querySelectorAll('a,button,.nd,.chip,.social-btn,.card-github-btn,.lang-btn,.hud-link').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('lk'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('lk'));
+  });
+}
 
-        /* Card: Cabinet médical */
-        'c.med.cat': 'Event-Driven · Microservices',
-        'c.med.title': 'Gestion Cabinet Médical — Architecture EDA',
-        'c.med.b1': "Migré une architecture REST synchrone (couplage fort, cascades d'erreurs) vers une architecture EDA Kafka, découplant 5 microservices autonomes",
-        'c.med.b2': 'Implémenté le pattern Publish/Subscribe avec saga distribuée par chorégraphie (patient, médecin, rendez-vous, consultation, billing) — consistance éventuelle garantie',
-        'c.med.b3': 'Déployé l\'infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) avec communication exclusivement événementielle entre services',
+/* ─── HAMBURGER ─── */
+const ham = document.getElementById('ham');
+const mobMenu = document.getElementById('mob-menu');
+function closeMenu(){
+  ham.classList.remove('open');
+  mobMenu.classList.remove('open');
+  ham.setAttribute('aria-expanded','false');
+}
+ham.addEventListener('click', () => {
+  const isOpen = ham.classList.toggle('open');
+  mobMenu.classList.toggle('open', isOpen);
+  ham.setAttribute('aria-expanded', isOpen);
+});
+document.addEventListener('click', e => {
+  if(!ham.contains(e.target) && !mobMenu.contains(e.target)) closeMenu();
+});
 
-        /* Card: MAS Sentinel */
-        'c.mas.cat': 'Multi-Agent · Monitoring IA',
-        'c.mas.title': 'MAS Pipeline Sentinel — Détection de Pannes Silencieuses',
-        'c.mas.b1': 'Architecturé un système autonome de 5 agents IA (LangGraph + Claude) détectant les pannes silencieuses invisibles aux outils de monitoring classiques — pipeline correct mais données incorrectes',
-        'c.mas.b2': 'Chaque agent couvre un domaine distinct (z-score, dérive de schéma, qualité dbt, blast DAG, remédiation) via 5 topics Kafka avec corrélation en fenêtre glissante de 5 min',
-        'c.mas.b3': 'Livré avec 188 tests unitaires, 4 modes d\'opération (shadow → autonome) et intégrations PagerDuty, Slack, Jira sur AWS ECS Fargate',
+/* ─── SMOOTH SCROLL — offset for fixed nav ─── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if(!target) return;
+    e.preventDefault();
+    const y = target.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({top: y, behavior: 'smooth'});
+    closeMenu();
+  });
+});
 
-        /* Card: Timetable */
-        'c.tt.cat': 'Optimisation · Algorithmes',
-        'c.tt.title': "Intelligent Timetabling Optimization System — Planify",
-        'c.tt.b1': "Conçu un système full-stack de génération automatique d'emplois du temps pour établissements d'enseignement supérieur, automatisant la planification complexe avec programmation par contraintes et SAT (OR-Tools MaxSAT) pour produire des emplois du temps sans conflit",
-        'c.tt.b2': "Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification sécurisée Spring Security + JWT, import Excel (Apache POI) et export PDF automatique",
-        'c.tt.b3': "Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples pour un résultat optimal",
+/* ─── PROGRESS BAR ─── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}, {passive:true});
 
-        /* Card: Fraude */
-        'c.fraud.cat': "ML Production · Détection d'Anomalies",
-        'c.fraud.title': 'Détection de Fraude Bancaire en Temps Réel',
-        'c.fraud.b1': 'Conçu un pipeline complet de détection de fraude (ingestion Kafka, feature store, entraînement XGBoost/LightGBM avec SMOTE) — <strong style="color:#34d399;">AUC-PR de 0.94</strong> sur un dataset fortement déséquilibré (0,1% de fraudes)',
-        'c.fraud.b2': 'Déployé une API d\'inférence temps réel (FastAPI, Docker) servant les prédictions avec une latence &lt;50ms, enregistrement des modèles via MLflow',
-        'c.fraud.b3': 'Monitoring de drift automatisé (Evidently AI) et dashboard de suivi des métriques de performance en production — alertes sur dérive de distribution',
+/* ─── SIDE NAV ─── */
+const scenes = document.querySelectorAll('[data-s]');
+const dots = document.querySelectorAll('.nd');
 
-        /* Card: Student */
-        'c.student.cat': 'Data Mining · Prédiction',
-        'c.student.title': 'Student Performance — Data Mining & Prediction',
-        'c.student.b1': 'Analysé un dataset de 25 000 étudiants × 16 variables : EDA complète (univariée, bivariée), ACP pour réduction de dimensionnalité, règles d\'association (Lift = 3.14)',
-        'c.student.b2': 'Entraîné et comparé Decision Tree vs Random Forest — modèle Random Forest retenu avec une précision de 75% ; identification des heures d\'étude comme facteur principal',
-        'c.student.b3': "Validé la cohérence interne des données par l'Alpha de Cronbach ; découverte que faible temps d'étude + assiduité moyenne conduit systématiquement à une performance faible",
-
-        /* Card: DS exploration */
-        'c.ds.cat': 'Data Science · Clustering · Classification · Association Rules',
-        'c.ds.title': "Exploration, Classification, Clustering & Règles d'Association",
-        'c.ds.b1': 'Réalisé une analyse exploratoire avancée sur deux datasets (Mall_Customers, heart.csv) : nettoyage, statistiques descriptives et visualisations multi-dimensionnelles des corrélations',
-        'c.ds.b2': 'Appliqué la classification supervisée sur données médicales (heart.csv) — Régression Logistique avec évaluation par matrices de confusion et métriques de performance',
-        'c.ds.b3': 'Segmenté les clients d\'un centre commercial via clustering non supervisé (algorithme BIRCH) révélant des groupes distincts par profil Revenu / Score de dépense',
-        'c.ds.b4': "Extrait des règles d'association par fouille de données (itemsets fréquents) pour identifier des comportements sous-jacents et patterns d'achat récurrents",
-
-        /* Skills */
-        'sk.cloud': 'Cloud & Plateformes',
-        'sk.de': 'Data Engineering',
-        'sk.devops': 'DevOps & CI/CD',
-        'sk.ml': 'Machine Learning',
-        'sk.ai': 'IA & Agents',
-        'sk.prog': 'Programmation',
-      },
-
-      en: {
-        /* Nav */
-        'nav.data': 'Data Engineering',
-        'nav.ai': 'AI & Agents',
-        'nav.ml': 'Machine Learning',
-        'nav.skills': 'Technical Stack',
-
-        /* Hero */
-        'hero.badge': 'Available · Open to opportunities',
-        'hero.sub': 'Real-time pipelines, event-driven architectures, multi-agent systems and production-grade Machine Learning — from prototype to production.',
-
-        /* Section titles */
-        's1.title': 'Data Engineering — Streaming & Pipelines',
-        's2.title': 'AI & Multi-Agent Systems',
-        's3.title': 'Machine Learning & Data Science',
-        's4.title': 'Technical Stack',
-
-        /* Card: Vols */
-        'c.vols.cat': 'Streaming · Hybrid ELT',
-        'c.vols.title': 'Real-Time Flight Tracking Pipeline',
-        'c.vols.b1': 'Designed an end-to-end ELT pipeline for real-time ingestion of global flight telemetry (OpenSky Network), separating low-latency streaming from analytical batch processing',
-        'c.vols.b2': 'Implemented a dual-write strategy to PostgreSQL (dbt dimensional models) and Cassandra (high-frequency time series) based on access profiles',
-        'c.vols.b3': 'Orchestrated the stack with Airflow (containerised DAGs) and exposed airport congestion KPIs in real-time Grafana dashboards',
-
-        /* Card: Cabinet médical */
-        'c.med.cat': 'Event-Driven · Microservices',
-        'c.med.title': 'Medical Practice Management — EDA Architecture',
-        'c.med.b1': 'Migrated a synchronous REST architecture (tight coupling, error cascades) to a Kafka EDA architecture, decoupling 5 autonomous microservices',
-        'c.med.b2': 'Implemented the Publish/Subscribe pattern with a distributed choreography saga (patient, doctor, appointment, consultation, billing) — eventual consistency guaranteed',
-        'c.med.b3': 'Deployed the infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) with exclusively event-driven communication between services',
-
-        /* Card: MAS Sentinel */
-        'c.mas.cat': 'Multi-Agent · AI Monitoring',
-        'c.mas.title': 'MAS Pipeline Sentinel — Silent Failure Detection',
-        'c.mas.b1': 'Architected an autonomous system of 5 AI agents (LangGraph + Claude) detecting silent failures invisible to classical monitoring tools — pipeline correct but data incorrect',
-        'c.mas.b2': 'Each agent covers a distinct domain (z-score, schema drift, dbt quality, DAG blast, remediation) via 5 Kafka topics with sliding-window correlation of 5 min',
-        'c.mas.b3': 'Delivered with 188 unit tests, 4 operating modes (shadow → autonomous) and PagerDuty, Slack, Jira integrations on AWS ECS Fargate',
-
-        /* Card: Timetable */
-        'c.tt.cat': 'Optimization · Algorithms',
-        'c.tt.title': 'Intelligent Timetabling Optimization System — Planify',
-        'c.tt.b1': 'Designed a full-stack automated timetable generation system for higher education institutions, automating complex scheduling using constraint programming and SAT techniques (OR-Tools MaxSAT) to produce conflict-free timetables',
-        'c.tt.b2': 'Built an advanced optimization engine handling professor availability, room capacities, session types, and working hours — with secure Spring Security + JWT auth, Excel bulk import (Apache POI), and automated PDF export',
-        'c.tt.b3': 'Monorepo architecture with Vue 3 + Vite + TypeScript + Pinia frontend and Spring Boot + JPA backend; MaxSAT solver enforcing hard constraints and optimizing soft preferences for an efficient, conflict-free result',
-
-        /* Card: Fraude */
-        'c.fraud.cat': 'ML Production · Anomaly Detection',
-        'c.fraud.title': 'Real-Time Banking Fraud Detection',
-        'c.fraud.b1': 'Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:#34d399;">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)',
-        'c.fraud.b2': 'Deployed a real-time inference API (FastAPI, Docker) serving predictions with &lt;50ms latency, with model registration via MLflow',
-        'c.fraud.b3': 'Automated drift monitoring (Evidently AI) and production performance dashboard with distribution drift alerts',
-
-        /* Card: Student */
-        'c.student.cat': 'Data Mining · Prediction',
-        'c.student.title': 'Student Performance — Data Mining & Prediction',
-        'c.student.b1': 'Analysed a dataset of 25,000 students × 16 variables: full EDA (univariate, bivariate), PCA for dimensionality reduction, association rules (Lift = 3.14)',
-        'c.student.b2': 'Trained and compared Decision Tree vs. Random Forest — Random Forest model selected with 75% accuracy; study hours identified as the primary factor',
-        'c.student.b3': "Validated internal data consistency via Cronbach's Alpha; finding that low study time + average attendance systematically leads to poor performance",
-
-        /* Card: DS exploration */
-        'c.ds.cat': 'Data Science · Clustering · Classification · Association Rules',
-        'c.ds.title': 'Exploration, Classification, Clustering & Association Rules',
-        'c.ds.b1': 'Conducted advanced exploratory analysis on two datasets (Mall_Customers, heart.csv): cleaning, descriptive statistics and multi-dimensional correlation visualisations',
-        'c.ds.b2': 'Applied supervised classification on medical data (heart.csv) — Logistic Regression evaluated with confusion matrices and performance metrics',
-        'c.ds.b3': 'Segmented mall customers via unsupervised clustering (BIRCH algorithm), revealing distinct groups by Income / Spending Score profile',
-        'c.ds.b4': 'Extracted association rules through data mining (frequent itemsets) to identify underlying behaviours and recurring purchase patterns',
-
-        /* Skills */
-        'sk.cloud': 'Cloud & Platforms',
-        'sk.de': 'Data Engineering',
-        'sk.devops': 'DevOps & CI/CD',
-        'sk.ml': 'Machine Learning',
-        'sk.ai': 'AI & Agents',
-        'sk.prog': 'Programming',
-      }
-    };
-
-    let currentLang = 'en';
-
-    function setLang(lang) {
-      if (lang === currentLang) return;
-      currentLang = lang;
-
-      // Update html lang attribute
-      document.documentElement.lang = lang;
-
-      // Update all translatable elements
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.innerHTML = translations[lang][key];
-        }
-      });
-
-      // Update button states
-      document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr');
-      document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const idx = +e.target.dataset.s;
+      dots.forEach((d,i) => d.classList.toggle('on', i === idx));
     }
+  });
+}, {threshold: 0.35});
 
-    // Initialize with English on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations['en'] && translations['en'][key]) {
-          el.innerHTML = translations['en'][key];
-        }
-      });
-    });
-  </script>
+scenes.forEach(s => navObs.observe(s));
+dots.forEach(d => d.addEventListener('click', () => {
+  const idx = +d.dataset.s;
+  if(scenes[idx]) scenes[idx].scrollIntoView({behavior:'smooth'});
+}));
 
+/* ─── SCROLL REVEAL ─── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('show'); revObs.unobserve(e.target); }
+  });
+}, {threshold: 0.12});
+
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ─── TRANSLATIONS ─── */
+const translations = {
+  fr: {
+    'nav.data':'Data Engineering','nav.ai':'IA & Agents','nav.ml':'Machine Learning','nav.dev':'Génie Logiciel','nav.skills':'Stack Technique',
+    'hero.sub':'Pipelines temps réel, architectures event-driven, systèmes multi-agents et Machine Learning production-grade — du prototype à la mise en production.',
+    's1.title':'Data Engineering — Streaming & Pipelines','s2.title':'IA & Systèmes Multi-Agents',
+    's3.title':'Machine Learning & Data Science','s4.title':'Génie Logiciel & Architecture','s5.title':'Stack Technique',
+    'c.vols.cat':'Streaming · ELT Hybride','c.vols.title':'Pipeline Suivi de Vols en Temps Réel',
+    'c.vols.b1':"Conçu un pipeline ELT bout-en-bout pour l'ingestion temps réel de télémétrie de vols mondiaux (OpenSky Network), séparant streaming bas-latence et batch analytique",
+    'c.vols.b2':"Implémenté une stratégie dual-write vers PostgreSQL (modèles dbt dimensionnels) et Cassandra (séries temporelles haute-fréquence) selon le profil d'accès",
+    'c.vols.b3':'Orchestré la stack via Airflow (DAGs containerisés) et exposé les KPIs de congestion aéroportuaire dans des dashboards Grafana temps réel',
+    'c.med.cat':'Event-Driven · Microservices','c.med.title':'Gestion Cabinet Médical — Architecture EDA',
+    'c.med.b1':"Migré une architecture REST synchrone (couplage fort, cascades d'erreurs) vers une architecture EDA Kafka, découplant 5 microservices autonomes",
+    'c.med.b2':"Implémenté le pattern Publish/Subscribe avec saga distribuée par chorégraphie (patient, médecin, rendez-vous, consultation, billing) — consistance éventuelle garantie",
+    'c.med.b3':"Déployé l'infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) avec communication exclusivement événementielle entre services",
+    'c.mas.cat':'Multi-Agent · Monitoring IA','c.mas.title':'MAS Pipeline Sentinel — Détection de Pannes Silencieuses',
+    'c.mas.b1':'Architecturé un système autonome de 5 agents IA (LangGraph + Claude) détectant les pannes silencieuses invisibles aux outils de monitoring classiques — pipeline correct mais données incorrectes',
+    'c.mas.b2':'Chaque agent couvre un domaine distinct (z-score, dérive de schéma, qualité dbt, blast DAG, remédiation) via 5 topics Kafka avec corrélation en fenêtre glissante de 5 min',
+    'c.mas.b3':"Livré avec 188 tests unitaires, 4 modes d'opération (shadow → autonome) et intégrations PagerDuty, Slack, Jira sur AWS ECS Fargate",
+    'c.finops.cat':'Multi-Agent · FinOps · Coût Cloud','c.finops.title':'CloudSense ⚡ — Plateforme FinOps Multi-Agent Autonome',
+    'c.finops.b1':"Conçu une plateforme FinOps open-source production-grade normalisant les données de facturation AWS, Azure & GCP dans un schéma FOCUS 1.0 unifié, streamant tous les événements de coût via Kafka KRaft (sans ZooKeeper) et les stockant dans ClickHouse pour des requêtes OLAP sub-seconde sur des centaines de millions de lignes",
+    'c.finops.b2':'Architecturé un superviseur LangGraph orchestrant des agents IA spécialistes (par cloud) qui analysent les données de facturation via des requêtes ClickHouse, produisant des objets CostInsight quantifiés synthétisés en objets RecommendationResult priorisés avec économies projetées et niveaux de risque',
+    'c.finops.b3':"Sécurisé les actions autonomes via un moteur de politiques OPA et livré des recommandations interactives approuver/rejeter sur Slack ; exposé les endpoints coût global, drill-down et allocation équipe via une API REST FastAPI",
+    'c.tt.cat':'Optimisation · Algorithmes','c.tt.title':"Intelligent Timetabling Optimization System — Planify",
+    'c.tt.b1':"Conçu un système full-stack de génération automatique d'emplois du temps pour établissements d'enseignement supérieur, automatisant la planification complexe avec programmation par contraintes et SAT (OR-Tools MaxSAT)",
+    'c.tt.b2':"Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification sécurisée Spring Security + JWT, import Excel (Apache POI) et export PDF automatique",
+    'c.tt.b3':"Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples",
+    'c.fraud.cat':"ML Production · Détection d'Anomalies",'c.fraud.title':'Détection de Fraude Bancaire en Temps Réel',
+    'c.fraud.b1':'Conçu un pipeline complet de détection de fraude (ingestion Kafka, feature store, entraînement XGBoost/LightGBM avec SMOTE) — <strong style="color:#34d399">AUC-PR de 0.94</strong> sur un dataset fortement déséquilibré (0,1% de fraudes)',
+    'c.fraud.b2':"Déployé une API d'inférence temps réel (FastAPI, Docker) servant les prédictions avec une latence <50ms, enregistrement des modèles via MLflow",
+    'c.fraud.b3':'Monitoring de drift automatisé (Evidently AI) et dashboard de suivi des métriques de performance en production — alertes sur dérive de distribution',
+    'c.student.cat':'Data Mining · Prédiction','c.student.title':'Student Performance — Data Mining & Prediction',
+    'c.student.b1':"Analysé un dataset de 25 000 étudiants × 16 variables : EDA complète (univariée, bivariée), ACP pour réduction de dimensionnalité, règles d'association (Lift = 3.14)",
+    'c.student.b2':'Entraîné et comparé Decision Tree vs Random Forest — modèle Random Forest retenu avec une précision de 75% ; identification des heures d\'étude comme facteur principal',
+    'c.student.b3':"Validé la cohérence interne des données par l'Alpha de Cronbach ; découverte que faible temps d'étude + assiduité moyenne conduit systématiquement à une performance faible",
+    'c.ds.cat':'Data Science · Clustering · Classification · Règles d\'Association','c.ds.title':"Exploration, Classification, Clustering & Règles d'Association",
+    'c.ds.b1':'Réalisé une analyse exploratoire avancée sur deux datasets (Mall_Customers, heart.csv) : nettoyage, statistiques descriptives et visualisations multi-dimensionnelles des corrélations',
+    'c.ds.b2':'Appliqué la classification supervisée sur données médicales (heart.csv) — Régression Logistique avec évaluation par matrices de confusion et métriques de performance',
+    'c.ds.b3':"Segmenté les clients d'un centre commercial via clustering non supervisé (algorithme BIRCH) révélant des groupes distincts par profil Revenu / Score de dépense",
+    'c.ds.b4':"Extrait des règles d'association par fouille de données (itemsets fréquents) pour identifier des comportements sous-jacents et patterns d'achat récurrents",
+    'sk.cloud':'Cloud & Plateformes','sk.de':'Data Engineering','sk.devops':'DevOps & CI/CD','sk.ml':'Machine Learning','sk.ai':'IA & Agents','sk.prog':'Programmation'
+  },
+  en: {
+    'nav.data':'Data Engineering','nav.ai':'AI & Agents','nav.ml':'Machine Learning','nav.dev':'Software Eng.','nav.skills':'Technical Stack',
+    'hero.sub':'Real-time pipelines, event-driven architectures, multi-agent systems and production-grade Machine Learning — from prototype to production.',
+    's1.title':'Data Engineering — Streaming & Pipelines','s2.title':'AI & Multi-Agent Systems',
+    's3.title':'Machine Learning & Data Science','s4.title':'Software Engineering & Architecture','s5.title':'Technical Stack',
+    'c.vols.cat':'Streaming · Hybrid ELT','c.vols.title':'Real-Time Flight Tracking Pipeline',
+    'c.vols.b1':'Designed an end-to-end ELT pipeline for real-time ingestion of global flight telemetry (OpenSky Network), separating low-latency streaming from analytical batch processing',
+    'c.vols.b2':'Implemented a dual-write strategy to PostgreSQL (dbt dimensional models) and Cassandra (high-frequency time series) based on access profiles',
+    'c.vols.b3':'Orchestrated the stack with Airflow (containerised DAGs) and exposed airport congestion KPIs in real-time Grafana dashboards',
+    'c.med.cat':'Event-Driven · Microservices','c.med.title':'Medical Practice Management — EDA Architecture',
+    'c.med.b1':'Migrated a synchronous REST architecture (tight coupling, error cascades) to a Kafka EDA architecture, decoupling 5 autonomous microservices',
+    'c.med.b2':'Implemented the Publish/Subscribe pattern with a distributed choreography saga (patient, doctor, appointment, consultation, billing) — eventual consistency guaranteed',
+    'c.med.b3':'Deployed the infrastructure via Docker Compose (Kafka, Zookeeper, Kafka UI, AKHQ) with exclusively event-driven communication between services',
+    'c.mas.cat':'Multi-Agent · AI Monitoring','c.mas.title':'MAS Pipeline Sentinel — Silent Failure Detection',
+    'c.mas.b1':'Architected an autonomous system of 5 AI agents (LangGraph + Claude) detecting silent failures invisible to classical monitoring tools — pipeline correct but data incorrect',
+    'c.mas.b2':'Each agent covers a distinct domain (z-score, schema drift, dbt quality, DAG blast, remediation) via 5 Kafka topics with sliding-window correlation of 5 min',
+    'c.mas.b3':'Delivered with 188 unit tests, 4 operating modes (shadow → autonomous) and PagerDuty, Slack, Jira integrations on AWS ECS Fargate',
+    'c.finops.cat':'Multi-Agent · FinOps · Cloud Cost','c.finops.title':'CloudSense ⚡ — Autonomous FinOps Multi-Agent Platform',
+    'c.finops.b1':'Built an open-source production-grade FinOps platform normalising billing data from AWS, Azure & GCP into a unified FOCUS 1.0 schema, streaming all cost events through Kafka KRaft (ZooKeeper-free) and storing them in ClickHouse for sub-second OLAP queries at hundreds of millions of rows',
+    'c.finops.b2':'Engineered a LangGraph supervisor orchestrating specialist AI agents (per cloud) that analyse billing data via ClickHouse queries, producing quantified CostInsight objects synthesised into prioritised RecommendationResult objects with projected savings and risk levels',
+    'c.finops.b3':'Enforced autonomous action safety via OPA policy gating and delivered interactive approve/reject recommendations to Slack; exposed cost overview, drill-down and team allocation through a FastAPI REST API',
+    'c.tt.cat':'Optimization · Algorithms','c.tt.title':'Intelligent Timetabling Optimization System — Planify',
+    'c.tt.b1':'Designed a full-stack automated timetable generation system for higher education institutions, automating complex scheduling using constraint programming and SAT techniques (OR-Tools MaxSAT) to produce conflict-free timetables',
+    'c.tt.b2':'Built an advanced optimization engine handling professor availability, room capacities, session types, and working hours — with secure Spring Security + JWT auth, Excel bulk import (Apache POI), and automated PDF export',
+    'c.tt.b3':'Monorepo architecture with Vue 3 + Vite + TypeScript + Pinia frontend and Spring Boot + JPA backend; MaxSAT solver enforcing hard constraints and optimizing soft preferences',
+    'c.fraud.cat':'ML Production · Anomaly Detection','c.fraud.title':'Real-Time Banking Fraud Detection',
+    'c.fraud.b1':'Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:#34d399">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)',
+    'c.fraud.b2':'Deployed a real-time inference API (FastAPI, Docker) serving predictions with &lt;50ms latency, with model registration via MLflow',
+    'c.fraud.b3':'Automated drift monitoring (Evidently AI) and production performance dashboard with distribution drift alerts',
+    'c.student.cat':'Data Mining · Prediction','c.student.title':'Student Performance — Data Mining & Prediction',
+    'c.student.b1':'Analysed a dataset of 25,000 students × 16 variables: full EDA (univariate, bivariate), PCA for dimensionality reduction, association rules (Lift = 3.14)',
+    'c.student.b2':'Trained and compared Decision Tree vs. Random Forest — Random Forest model selected with 75% accuracy; study hours identified as the primary factor',
+    'c.student.b3':"Validated internal data consistency via Cronbach's Alpha; finding that low study time + average attendance systematically leads to poor performance",
+    'c.ds.cat':'Data Science · Clustering · Classification · Association Rules','c.ds.title':'Exploration, Classification, Clustering & Association Rules',
+    'c.ds.b1':'Conducted advanced exploratory analysis on two datasets (Mall_Customers, heart.csv): cleaning, descriptive statistics and multi-dimensional correlation visualisations',
+    'c.ds.b2':'Applied supervised classification on medical data (heart.csv) — Logistic Regression evaluated with confusion matrices and performance metrics',
+    'c.ds.b3':'Segmented mall customers via unsupervised clustering (BIRCH algorithm), revealing distinct groups by Income / Spending Score profile',
+    'c.ds.b4':'Extracted association rules through data mining (frequent itemsets) to identify underlying behaviours and recurring purchase patterns',
+    'sk.cloud':'Cloud & Platforms','sk.de':'Data Engineering','sk.devops':'DevOps & CI/CD','sk.ml':'Machine Learning','sk.ai':'AI & Agents','sk.prog':'Programming'
+  }
+};
+
+let currentLang = 'en';
+function setLang(lang){
+  if(lang === currentLang) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(translations[lang]?.[key]) el.innerHTML = translations[lang][key];
+  });
+  document.getElementById('btn-fr').classList.toggle('active', lang==='fr');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-fr').setAttribute('aria-pressed', lang==='fr');
+  document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(translations['en']?.[key]) el.innerHTML = translations['en'][key];
+  });
+});
+</script>
 </body>
-
 </html>
