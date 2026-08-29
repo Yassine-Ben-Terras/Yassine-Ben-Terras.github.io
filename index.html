@@ -6,66 +6,53 @@
 <title>Yassine Ben Terras — Data Engineer & AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  /* Emerald palette */
-  --cream:    #FFFFFF;
-  --paper:    #f0fdf9;
-  --sand:     #D1FAE5;
-  --warm-mid: #6EE7B7;
-  --bark:     #059669;
-  --earth:    #0D5C46;
-  --ink:      #111111;
-  --ink2:     #374151;
-  --ink3:     #6B7280;
+  --bg:        #FFFFFF;
+  --surface:   #F6F7F9;
+  --surface-2: #EEF1F5;
+  --border:    #E4E7EC;
+  --border-2:  #D6DAE2;
 
-  /* Accent colours — emerald */
-  --terra:    #00C17C;   /* emerald accent primary */
-  --sage:     #10B981;   /* emerald green */
-  --dusk:     #0D5C46;   /* dark green */
-  --gold:     #059669;   /* mid emerald */
-  --steel:    #047857;   /* deep emerald */
+  --ink:   #14161A;
+  --ink-2: #52565F;
+  --ink-3: #8A8E96;
 
-  --border:   rgba(209,250,229,.6);
-  --border2:  rgba(16,185,129,.25);
+  --accent:      #2454D6;
+  --accent-dark: #17348F;
+  --accent-tint: #EDF2FE;
 
-  --fs: 'Lora', Georgia, serif;
-  --fb: 'DM Sans', sans-serif;
-  --fm: 'DM Mono', monospace;
+  --ok: #16A34A;
 
-  --radius: 14px;
+  --fb: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fm: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --radius:    14px;
   --radius-sm: 8px;
-
-  --nav-h: 60px;
+  --nav-h:     64px;
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--fb);
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
+  font-size: 15.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
-/* ── TEXTURE OVERLAY ── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: .032;
-  pointer-events: none;
-  z-index: 9999;
-}
+img,svg { display:block; }
+.icon { width: 15px; height: 15px; fill: none; stroke: currentColor; }
+.icon-fill { width: 15px; height: 15px; fill: currentColor; }
 
 /* ── PROGRESS BAR ── */
 #prog {
   position: fixed; top: 0; left: 0; height: 2px;
-  background: linear-gradient(90deg, var(--terra), var(--sage));
+  background: var(--accent);
   width: 0%; z-index: 1001;
   transition: width .08s linear;
 }
@@ -74,71 +61,61 @@ body::before {
 nav.topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
   height: var(--nav-h);
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
 .nav-inner {
   display: flex; align-items: center; justify-content: space-between;
-  height: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2rem; gap: 1rem;
+  height: 100%; max-width: 1120px; margin: 0 auto; padding: 0 2rem; gap: 1rem;
 }
 .nav-logo {
-  font-family: var(--fs); font-weight: 600; font-size: .9rem;
-  letter-spacing: .01em; color: var(--ink); text-decoration: none; flex-shrink: 0;
-  font-style: italic;
+  font-weight: 700; font-size: .92rem;
+  letter-spacing: -.01em; color: var(--ink); text-decoration: none; flex-shrink: 0;
 }
-.nav-logo span { color: var(--earth); font-style: normal; font-weight: 600; }
+.nav-logo span { color: var(--accent); }
 
-.nav-links { display: flex; gap: 2rem; list-style: none; flex: 1; justify-content: center; }
+.nav-links { display: flex; gap: 1.9rem; list-style: none; flex: 1; justify-content: center; }
 .nav-links a {
-  color: var(--ink3); text-decoration: none; font-size: .78rem;
-  letter-spacing: .06em; text-transform: uppercase; font-weight: 500;
-  transition: color .2s; position: relative; white-space: nowrap;
+  color: var(--ink-2); text-decoration: none; font-size: .85rem;
+  font-weight: 500; transition: color .15s; white-space: nowrap;
 }
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0;
-  width: 0; height: 1.5px; background: var(--terra); transition: width .2s;
-  border-radius: 2px;
-}
-.nav-links a:hover { color: var(--earth); }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--ink); }
 
 .nav-right { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
 
 /* Lang switcher */
 .lang-switcher {
   display: flex; align-items: center; gap: 2px;
-  background: var(--paper); border: 1px solid var(--border2);
+  background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-sm); padding: 3px;
 }
 .lang-btn {
-  font-family: var(--fm); font-size: .65rem; font-weight: 500;
-  letter-spacing: .06em; padding: 3px 10px; border-radius: 5px;
-  border: none; cursor: pointer; transition: all .2s;
-  background: transparent; color: var(--ink3);
+  font-family: var(--fm); font-size: .66rem; font-weight: 500;
+  letter-spacing: .04em; padding: 4px 10px; border-radius: 5px;
+  border: none; cursor: pointer; transition: all .15s;
+  background: transparent; color: var(--ink-3);
 }
-.lang-btn.active {
-  background: var(--terra); color: #fff; font-weight: 600;
-}
-.lang-btn:hover:not(.active) { color: var(--ink); background: var(--sand); }
+.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn:hover:not(.active) { color: var(--ink); }
 
 /* Hamburger */
 .hamburger {
   display: none; flex-direction: column; justify-content: center;
   gap: 5px; width: 36px; height: 36px; background: transparent;
-  border: 1px solid var(--border2); border-radius: var(--radius-sm);
-  padding: 8px; cursor: pointer; transition: border-color .2s; flex-shrink: 0;
+  border: 1px solid var(--border-2); border-radius: var(--radius-sm);
+  padding: 8px; cursor: pointer; flex-shrink: 0;
 }
 .hamburger span {
-  display: block; height: 1px; background: var(--ink2);
-  border-radius: 2px; transition: all .3s ease; transform-origin: center;
+  display: block; height: 1px; background: var(--ink-2);
+  border-radius: 2px; transition: all .25s ease; transform-origin: center;
 }
 .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4.5px,4.5px); }
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4.5px,-4.5px); }
 
-@media(max-width:768px){
+@media(max-width:820px){
   .nav-links{display:none}
   .hamburger{display:flex}
 }
@@ -146,398 +123,302 @@ nav.topbar {
 /* Mobile drawer */
 .mobile-menu {
   position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 499;
-  background: var(--cream); border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem; display: flex; flex-direction: column; gap: .25rem;
-  transform: translateY(-110%); transition: transform .3s ease;
-  box-shadow: 0 8px 32px rgba(0,193,124,.08);
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  padding: .5rem 2rem 1rem; display: flex; flex-direction: column;
+  transform: translateY(-110%); transition: transform .25s ease;
+  box-shadow: 0 12px 32px rgba(20,22,26,.06);
 }
 .mobile-menu.open { transform: translateY(0); }
 .mobile-menu a {
-  font-size: .85rem; font-weight: 500; letter-spacing: .05em;
-  text-transform: uppercase; color: var(--ink2); text-decoration: none;
-  padding: .6rem 0; border-bottom: 1px solid var(--border);
-  transition: color .2s;
+  font-size: .88rem; font-weight: 500;
+  color: var(--ink-2); text-decoration: none;
+  padding: .7rem 0; border-bottom: 1px solid var(--border);
 }
 .mobile-menu a:last-child { border-bottom: none; }
-.mobile-menu a:hover { color: var(--terra); }
+.mobile-menu a:hover { color: var(--accent); }
+
 /* ── ANIMATIONS ── */
-@keyframes fadeUp  { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:none } }
-@keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
-@keyframes pulse   { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
-@keyframes floatY  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-@keyframes drawLine{ from{stroke-dashoffset:500} to{stroke-dashoffset:0} }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px) } to { opacity:1; transform:none } }
 
 /* ── HERO ── */
 #hero {
-  position: relative;
-  min-height: 100vh; min-height: 100dvh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: var(--cream);
-  padding: calc(var(--nav-h) + 2rem) 2rem 4rem;
-  overflow: hidden;
+  padding: calc(var(--nav-h) + 4.5rem) 2rem 4rem;
+  background: var(--bg);
+}
+.hero-inner {
+  max-width: 1120px; margin: 0 auto;
+  opacity: 0; animation: fadeUp .7s ease .1s forwards;
 }
 
-/* Warm ink bleed background shapes */
-.hero-blob {
-  position: absolute; border-radius: 50%;
-  pointer-events: none; filter: blur(90px);
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border: 1px solid var(--border-2);
+  border-radius: 100px; background: var(--surface);
+  font-size: .78rem; color: var(--ink-2); margin-bottom: 1.75rem;
 }
-.hero-blob-1 {
-  width: 700px; height: 500px;
-  background: radial-gradient(ellipse, rgba(0,193,124,.10) 0%, transparent 70%);
-  top: -60px; left: -120px;
-  animation: floatY 12s ease-in-out infinite;
-}
-.hero-blob-2 {
-  width: 500px; height: 500px;
-  background: radial-gradient(ellipse, rgba(16,185,129,.08) 0%, transparent 70%);
-  bottom: -80px; right: -80px;
-  animation: floatY 15s ease-in-out infinite reverse;
-}
-.hero-blob-3 {
-  width: 380px; height: 300px;
-  background: radial-gradient(ellipse, rgba(13,92,70,.06) 0%, transparent 70%);
-  top: 40%; left: 60%;
-  animation: floatY 10s ease-in-out 2s infinite;
-}
-
-/* Decorative line art */
-.hero-deco {
-  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
-}
-.hero-deco svg { width: 100%; height: 100%; }
-
-.hero-center {
-  position: relative; z-index: 5;
-  text-align: center; max-width: 720px;
-  opacity: 0; animation: fadeUp .9s ease .2s forwards;
-}
-
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--fm); font-size: .7rem; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--terra);
-  margin-bottom: 1.5rem;
-}
-.hero-eyebrow::before,
-.hero-eyebrow::after {
-  content: ''; flex: 1; height: 1px; background: var(--terra); opacity: .35;
-  width: 32px;
+.badge-pill .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--ok);
+  box-shadow: 0 0 0 3px rgba(22,163,74,.15); flex-shrink: 0;
 }
 
 .hero-name {
-  font-family: var(--fs); font-weight: 700;
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  line-height: 1.08; letter-spacing: -.02em;
-  color: var(--ink); margin-bottom: .6rem;
+  font-weight: 800; letter-spacing: -.03em; line-height: 1.06;
+  font-size: clamp(2.4rem, 6vw, 3.7rem);
+  color: var(--ink); margin-bottom: .7rem; max-width: 780px;
 }
-.hero-name em {
-  font-style: italic; color: var(--earth);
-  font-weight: 400;
-}
+.hero-name span { color: var(--accent); }
 
 .hero-role {
-  font-family: var(--fs); font-style: italic; font-weight: 400;
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
-  color: var(--bark); margin-bottom: 1.25rem;
+  font-size: 1.05rem; font-weight: 500;
+  color: var(--ink-2); margin-bottom: 1.1rem;
 }
 
 .hero-sub {
-  font-size: .95rem; color: var(--ink2); line-height: 1.8;
-  font-weight: 300; max-width: 560px; margin: 0 auto 2rem;
+  font-size: .96rem; color: var(--ink-2); line-height: 1.75;
+  font-weight: 400; max-width: 600px; margin-bottom: 2.1rem;
 }
 
 .hero-chips {
-  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-  margin-bottom: 2.5rem;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 2.25rem;
 }
 .chip {
-  padding: 5px 14px; border-radius: 100px;
-  font-size: .7rem; font-family: var(--fm);
-  border: 1px solid; letter-spacing: .03em; font-weight: 500;
-  transition: transform .15s, box-shadow .15s;
+  padding: 5px 13px; border-radius: 100px;
+  font-size: .72rem; font-family: var(--fm);
+  border: 1px solid var(--border); color: var(--ink-2);
+  background: var(--surface); font-weight: 500;
 }
-.chip:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,193,124,.15); }
-.chip-terra { border-color:rgba(0,193,124,.35);  color:#0D5C46; background:rgba(0,193,124,.08); }
-.chip-sage  { border-color:rgba(16,185,129,.35); color:#065F46; background:rgba(16,185,129,.08); }
-.chip-dusk  { border-color:rgba(13,92,70,.3);    color:#0D5C46; background:rgba(13,92,70,.06); }
-.chip-gold  { border-color:rgba(5,150,105,.3);   color:#047857; background:rgba(5,150,105,.06); }
-.chip-steel { border-color:rgba(4,120,87,.3);    color:#065F46; background:rgba(4,120,87,.06); }
 
-.hero-socials { display: flex; gap: 10px; justify-content: center; }
-.social-btn {
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 9px 22px; border-radius: var(--radius-sm);
-  font-family: var(--fm); font-size: .72rem; font-weight: 500;
-  letter-spacing: .05em; text-decoration: none;
-  border: 1px solid var(--border2); background: var(--paper);
-  color: var(--ink2); transition: all .22s ease;
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  font-size: .84rem; font-weight: 600;
+  text-decoration: none; border: 1px solid transparent;
+  transition: all .18s ease;
 }
-.social-btn:hover {
-  color: var(--ink); border-color: var(--bark);
-  background: var(--sand); transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,193,124,.15);
-}
-.social-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
-
-/* Primary CTA */
-.social-btn.primary {
-  background: var(--terra); border-color: var(--terra); color: #fff;
-}
-.social-btn.primary:hover {
-  background: var(--earth); border-color: var(--earth); color: #fff;
-  box-shadow: 0 6px 24px rgba(0,193,124,.3);
-}
-
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: .5rem;
-  font-family: var(--fm); font-size: .6rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--ink3);
-  opacity: 0; animation: fadeIn .6s ease 1.6s forwards;
-}
-.scroll-mouse {
-  width: 22px; height: 34px; border: 1.5px solid var(--warm-mid);
-  border-radius: 12px; position: relative;
-}
-.scroll-mouse::after {
-  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-  width: 3px; height: 7px; background: var(--bark); border-radius: 2px;
-  animation: floatY 1.8s ease-in-out infinite;
-}
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-secondary { background: var(--bg); color: var(--ink-2); border-color: var(--border-2); }
+.btn-secondary:hover { color: var(--ink); border-color: var(--ink-3); background: var(--surface); }
 
 /* ── LAYOUT ── */
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
 
 /* ── SECTION ── */
 .section {
-  padding: 6rem 0;
+  padding: 5.5rem 0;
   border-top: 1px solid var(--border);
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .7s ease, transform .7s ease;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
 }
 .section.show { opacity: 1; transform: none; }
 
-.section-header {
-  display: flex; align-items: baseline; gap: 1.5rem;
-  margin-bottom: 3.5rem;
-}
-.section-num {
-  font-family: var(--fm); font-size: .68rem; letter-spacing: .14em;
-  color: var(--terra); font-weight: 500; flex-shrink: 0;
-  padding: 2px 0;
+.section-head {
+  margin-bottom: 3rem; padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
 }
 .section-title {
-  font-family: var(--fs); font-weight: 600;
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-  color: var(--ink); letter-spacing: -.02em; line-height: 1.2;
+  font-weight: 700; letter-spacing: -.015em; line-height: 1.25;
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  color: var(--ink);
 }
-.section-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(to right, var(--border2), transparent);
-  margin-bottom: 4px;
+.section-sub {
+  font-size: .85rem; color: var(--ink-3); max-width: 360px; text-align: right;
 }
+@media(max-width:640px){ .section-sub{ display:none; } }
 
 /* ── PROJECT GRID ── */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1.5rem;
 }
-@media(max-width: 560px) { .projects-grid { grid-template-columns: 1fr; } }
+@media(max-width: 900px) { .projects-grid { grid-template-columns: 1fr; } }
 
 /* ── CARD ── */
 .card {
-  background: var(--paper);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.75rem;
-  display: flex; flex-direction: column; gap: 0;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
-  position: relative; overflow: hidden;
-}
-.card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--cat-color, var(--terra));
-  opacity: .7;
-  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex; flex-direction: column;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,193,124,.1), 0 4px 12px rgba(16,185,129,.08);
-  border-color: var(--border2);
+  border-color: var(--border-2);
+  box-shadow: 0 12px 32px rgba(20,22,26,.06);
+  transform: translateY(-2px);
 }
 
 .card-top {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 1rem; margin-bottom: 1.25rem;
+  display: flex; align-items: flex-start;
+  gap: .9rem; margin-bottom: 1.25rem;
 }
 .card-icon {
-  font-size: 1.6rem; flex-shrink: 0; line-height: 1;
-  margin-top: 2px;
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
 }
-
 .card-category {
-  font-family: var(--fm); font-size: .65rem; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--cat-color, var(--terra));
-  margin-bottom: .45rem; font-weight: 500;
+  font-family: var(--fm); font-size: .66rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: .4rem; font-weight: 600;
 }
 .card-title {
-  font-family: var(--fs); font-weight: 600;
-  font-size: 1.05rem; line-height: 1.3;
+  font-weight: 700; font-size: 1.02rem; line-height: 1.35;
   color: var(--ink); letter-spacing: -.01em;
 }
 
-.card-divider {
-  height: 1px; background: var(--border);
-  margin-bottom: 1.15rem;
-}
+.card-divider { height: 1px; background: var(--border); margin-bottom: 1.15rem; }
 
 .card-bullets {
-  list-style: none; display: flex; flex-direction: column; gap: .65rem;
+  list-style: none; display: flex; flex-direction: column; gap: .6rem;
   flex: 1; margin-bottom: 1.25rem;
 }
 .card-bullets li {
-  font-size: .875rem; color: var(--ink2); line-height: 1.65;
-  padding-left: 1.1em; position: relative;
+  font-size: .87rem; color: var(--ink-2); line-height: 1.6;
+  padding-left: 1.05em; position: relative;
 }
 .card-bullets li::before {
-  content: '—'; position: absolute; left: 0;
-  color: var(--warm-mid); font-size: .75rem; top: .2em;
+  content: '–'; position: absolute; left: 0; color: var(--accent);
 }
 
-.card-tags {
-  display: flex; flex-wrap: wrap; gap: 5px;
-  margin-bottom: 1.25rem;
-}
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
 .tag {
-  font-family: var(--fm); font-size: .62rem; letter-spacing: .04em;
-  padding: 3px 9px; border-radius: 4px;
-  background: #D1FAE5; color: #065F46;
-  border: 1px solid rgba(16,185,129,.3); white-space: nowrap;
+  font-family: var(--fm); font-size: .64rem; letter-spacing: .02em;
+  padding: 3px 9px; border-radius: 5px;
+  background: var(--surface); color: var(--ink-2);
+  border: 1px solid var(--border); white-space: nowrap;
 }
 
 .card-footer { margin-top: auto; }
 .card-github-btn {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: var(--fm); font-size: .68rem; letter-spacing: .06em;
-  text-decoration: none; color: var(--ink3);
-  padding: 7px 16px; border-radius: var(--radius-sm);
-  border: 1px solid var(--border2); background: var(--cream);
-  transition: all .2s ease;
+  font-size: .8rem; font-weight: 600;
+  text-decoration: none; color: var(--ink-2);
+  padding: 7px 15px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-2); background: var(--bg);
+  transition: all .18s ease;
 }
-.card-github-btn:hover {
-  color: var(--ink); border-color: var(--bark);
-  background: var(--sand); transform: translateX(2px);
+.card-github-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-tint); }
+
+/* ── CERTIFICATIONS ── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
-.card-github-btn svg { width: 13px; height: 13px; fill: currentColor; }
+.cert-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.75rem;
+  display: flex; flex-direction: column; gap: .55rem;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.cert-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 14px 32px rgba(36,84,214,.1);
+  transform: translateY(-2px);
+}
+.cert-badge {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--accent-tint); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: .35rem;
+}
+.cert-badge svg { width: 22px; height: 22px; }
+.cert-code {
+  font-family: var(--fm); font-size: .72rem; font-weight: 600;
+  letter-spacing: .06em; color: var(--accent);
+}
+.cert-name { font-size: .98rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+.cert-desc { font-size: .85rem; color: var(--ink-2); line-height: 1.6; flex: 1; }
+.cert-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+  padding-top: .85rem; margin-top: .35rem;
+  border-top: 1px solid var(--border);
+}
+.cert-issuer {
+  font-family: var(--fm); font-size: .68rem; color: var(--ink-3);
+  letter-spacing: .04em;
+}
+.cert-verify {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .78rem; font-weight: 600; color: var(--accent);
+  text-decoration: none; padding: 5px 12px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-2); transition: all .18s ease;
+}
+.cert-verify svg { width: 12px; height: 12px; }
+.cert-verify:hover { color: #fff; background: var(--accent); border-color: var(--accent); }
 
 /* ── SKILLS GRID ── */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
-@media(max-width: 560px) { .skills-grid { grid-template-columns: 1fr 1fr; gap: 1rem; } }
+@media(max-width: 560px) { .skills-grid { grid-template-columns: 1fr 1fr; gap: .9rem; } }
 
 .skill-group {
-  background: var(--paper); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 1.4rem 1.35rem;
-  transition: box-shadow .2s;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.35rem 1.3rem;
+  transition: border-color .2s ease;
 }
-.skill-group:hover {
-  box-shadow: 0 8px 28px rgba(0,193,124,.1);
-}
+.skill-group:hover { border-color: var(--border-2); }
 .skill-group-title {
-  font-family: var(--fm); font-size: .65rem; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--terra); margin-bottom: .9rem;
-  font-weight: 500; padding-bottom: .6rem;
+  font-family: var(--fm); font-size: .64rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .85rem;
+  font-weight: 600; padding-bottom: .6rem;
   border-bottom: 1px solid var(--border);
 }
 .skill-items { display: flex; flex-wrap: wrap; gap: 5px; }
 .skill-item {
-  font-family: var(--fm); font-size: .7rem;
-  padding: 4px 10px; border-radius: 4px;
-  background: #D1FAE5; color: #065F46;
-  border: 1px solid rgba(16,185,129,.3); letter-spacing: .02em;
+  font-family: var(--fm); font-size: .72rem;
+  padding: 4px 10px; border-radius: 5px;
+  background: var(--surface); color: var(--ink-2);
+  border: 1px solid var(--border);
 }
-
-/* ── SIDE NAV DOTS ── */
-#sidenav {
-  position: fixed; top: 50%; right: 1.5rem;
-  transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: .55rem;
-  z-index: 200; opacity: 0;
-  animation: fadeIn .4s ease 1.5s forwards;
-}
-.nd {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--warm-mid); cursor: pointer;
-  transition: all .25s ease; position: relative;
-}
-.nd::after {
-  content: attr(data-label); position: absolute;
-  right: 18px; top: 50%; transform: translateY(-50%);
-  font-family: var(--fm); font-size: .58rem; letter-spacing: .06em;
-  color: var(--terra); white-space: nowrap;
-  opacity: 0; transition: opacity .2s; pointer-events: none;
-}
-.nd:hover::after, .nd.on::after { opacity: 1; }
-.nd.on, .nd:hover {
-  background: var(--terra);
-  box-shadow: 0 0 0 3px rgba(0,193,124,.2);
-  transform: scale(1.4);
-}
-@media(max-width:900px){#sidenav{display:none}}
 
 /* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 3rem 0 2.5rem;
-  text-align: center;
-}
+footer { border-top: 1px solid var(--border); padding: 3rem 0 2.5rem; }
 footer .wrap {
   display: flex; flex-direction: column;
-  align-items: center; gap: 1rem;
+  align-items: center; gap: 1rem; text-align: center;
 }
-.foot-name {
-  font-family: var(--fs); font-style: italic;
-  font-size: 1.05rem; color: var(--ink2);
-}
-.foot-meta {
-  font-family: var(--fm); font-size: .68rem;
-  letter-spacing: .06em; color: var(--ink3);
-}
-.foot-links {
-  display: flex; gap: 1.5rem; align-items: center;
-}
+.foot-name { font-weight: 700; font-size: 1rem; color: var(--ink); }
+.foot-meta { font-size: .82rem; color: var(--ink-3); }
+.foot-links { display: flex; gap: 1.5rem; align-items: center; }
 .foot-link {
-  font-family: var(--fm); font-size: .7rem; letter-spacing: .06em;
-  text-decoration: none; color: var(--bark);
-  transition: color .2s;
+  font-size: .82rem; font-weight: 600;
+  text-decoration: none; color: var(--accent);
 }
-.foot-link:hover { color: var(--terra); }
-.foot-divider {
-  width: 3px; height: 3px; border-radius: 50%; background: var(--warm-mid);
-}
-.foot-copy {
-  font-family: var(--fm); font-size: .62rem;
-  color: var(--warm-mid); letter-spacing: .04em;
-}
+.foot-link:hover { color: var(--accent-dark); }
+.foot-divider { width: 3px; height: 3px; border-radius: 50%; background: var(--border-2); }
+.foot-copy { font-family: var(--fm); font-size: .68rem; color: var(--ink-3); }
 
 /* ── MEDIA TWEAKS ── */
 @media(max-width:768px){
-  .section { padding: 4rem 0; }
+  .section { padding: 3.75rem 0; }
   .wrap { padding: 0 1.25rem; }
-  .hero-chips { gap: 6px; }
+  #hero { padding: calc(var(--nav-h) + 3rem) 1.25rem 3rem; }
 }
 </style>
 </head>
 <body>
 
 <div id="prog"></div>
+
+<!-- Reusable icons -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.42.162-.8.428-1.085l.009-.01A1.628 1.628 0 0 1 1.636 3.82h.749L12 10.638 21.615 3.82h.749c.9 0 1.636.732 1.636 1.637z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-extlink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></symbol>
+</svg>
 
 <!-- ── TOP NAV ── -->
 <nav class="topbar">
@@ -548,7 +429,8 @@ footer .wrap {
       <li><a href="#ai" data-i18n="nav.ai">AI &amp; Agents</a></li>
       <li><a href="#ml" data-i18n="nav.ml">Machine Learning</a></li>
       <li><a href="#dev" data-i18n="nav.dev">Software Eng.</a></li>
-      <li><a href="#backend" data-i18n="nav.skills">Tech Stack</a></li>
+      <li><a href="#certs" data-i18n="nav.cert">Certifications</a></li>
+      <li><a href="#stack" data-i18n="nav.skills">Tech Stack</a></li>
     </ul>
     <div class="nav-right">
       <div class="lang-switcher">
@@ -568,54 +450,18 @@ footer .wrap {
   <a href="#ai" data-i18n="nav.ai">AI &amp; Agents</a>
   <a href="#ml" data-i18n="nav.ml">Machine Learning</a>
   <a href="#dev" data-i18n="nav.dev">Software Eng.</a>
-  <a href="#backend" data-i18n="nav.skills">Tech Stack</a>
-</div>
-
-<!-- ── SIDE NAV DOTS ── -->
-<div id="sidenav">
-  <div class="nd on" data-s="0" data-label="Home"></div>
-  <div class="nd" data-s="1" data-label="Data Eng."></div>
-  <div class="nd" data-s="2" data-label="AI & Agents"></div>
-  <div class="nd" data-s="3" data-label="ML"></div>
-  <div class="nd" data-s="4" data-label="Software"></div>
-  <div class="nd" data-s="5" data-label="Stack"></div>
+  <a href="#certs" data-i18n="nav.cert">Certifications</a>
+  <a href="#stack" data-i18n="nav.skills">Tech Stack</a>
 </div>
 
 <!-- ══════════════════════════════════════════ -->
 <!-- HERO                                       -->
 <!-- ══════════════════════════════════════════ -->
-<section id="hero" data-s="0">
+<section id="hero">
+  <div class="wrap hero-inner">
+    <div class="badge-pill"><span class="dot"></span>Available for opportunities</div>
 
-  <!-- Background atmosphere -->
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-blob hero-blob-3"></div>
-
-  <!-- Decorative SVG lines -->
-  <div class="hero-deco">
-    <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Organic curved lines, barely visible -->
-      <path d="M-80 580 Q 200 480 400 540 Q 600 600 900 480 Q 1100 400 1300 460" stroke="rgba(0,193,124,.10)" stroke-width="1.5" fill="none"/>
-      <path d="M-80 620 Q 300 520 500 580 Q 700 640 1000 510 Q 1150 440 1300 500" stroke="rgba(0,193,124,.07)" stroke-width="1" fill="none"/>
-      <path d="M100 -20 Q 180 200 140 380 Q 100 520 200 700" stroke="rgba(90,122,94,.06)" stroke-width="1" fill="none"/>
-      <path d="M1050 -20 Q 1020 250 1080 420 Q 1120 560 1000 700" stroke="rgba(107,91,138,.05)" stroke-width="1" fill="none"/>
-      <!-- Corner decorations -->
-      <circle cx="80" cy="80" r="1.5" fill="rgba(192,98,43,.25)"/>
-      <circle cx="80" cy="104" r="1.5" fill="rgba(192,98,43,.15)"/>
-      <circle cx="104" cy="80" r="1.5" fill="rgba(192,98,43,.15)"/>
-      <circle cx="1120" cy="600" r="1.5" fill="rgba(90,122,94,.25)"/>
-      <circle cx="1120" cy="624" r="1.5" fill="rgba(90,122,94,.15)"/>
-      <circle cx="1144" cy="600" r="1.5" fill="rgba(90,122,94,.15)"/>
-    </svg>
-  </div>
-
-  <div class="hero-center">
-    <div class="hero-eyebrow">Available for opportunities</div>
-
-    <h1 class="hero-name">
-      Yassine<br><em>Ben Terras</em>
-    </h1>
-
+    <h1 class="hero-name">Yassine <span>Ben Terras</span></h1>
     <p class="hero-role">Data Engineer &amp; AI Systems Builder</p>
 
     <p class="hero-sub" data-i18n="hero.sub">
@@ -623,33 +469,25 @@ footer .wrap {
     </p>
 
     <div class="hero-chips">
-      <span class="chip chip-sage">Azure</span>
-      <span class="chip chip-gold">Databricks</span>
-      <span class="chip chip-terra">Kafka</span>
-      <span class="chip chip-steel">Spark</span>
-      <span class="chip chip-dusk">dbt</span>
-      <span class="chip chip-terra">Airflow</span>
+      <span class="chip">Azure</span>
+      <span class="chip">Databricks</span>
+      <span class="chip">Kafka</span>
+      <span class="chip">Spark</span>
+      <span class="chip">dbt</span>
+      <span class="chip">Airflow</span>
     </div>
 
-    <div class="hero-socials">
-      <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener" class="social-btn primary">
-        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
+    <div class="hero-ctas">
+      <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg class="icon-fill" style="fill:#fff"><use href="#i-github"/></svg> GitHub
       </a>
-      <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener" class="social-btn">
-        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
+      <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener" class="btn btn-secondary">
+        <svg class="icon-fill"><use href="#i-linkedin"/></svg> LinkedIn
       </a>
-      <a href="mailto:yassine.benterras02@gmail.com" class="social-btn">
-        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.42.162-.8.428-1.085l.009-.01A1.628 1.628 0 0 1 1.636 3.82h.749L12 10.638 21.615 3.82h.749c.9 0 1.636.732 1.636 1.637z"/></svg>
-        Email
+      <a href="mailto:yassine.benterras@gmail.com" class="btn btn-secondary">
+        <svg class="icon-fill"><use href="#i-mail"/></svg> Email
       </a>
     </div>
-  </div>
-
-  <div class="hero-scroll">
-    <div class="scroll-mouse"></div>
-    <span>Scroll</span>
   </div>
 </section>
 
@@ -659,22 +497,20 @@ footer .wrap {
 <div class="wrap">
 
   <!-- ═══ DATA ENGINEERING ═══ -->
-  <section class="section reveal" id="streaming" data-s="1">
-    <div class="section-header">
-      <span class="section-num">01</span>
+  <section class="section reveal" id="streaming">
+    <div class="section-head">
       <h2 class="section-title" data-i18n="s1.title">Data Engineering — Streaming &amp; Pipelines</h2>
-      <div class="section-line"></div>
     </div>
     <div class="projects-grid">
 
       <!-- Flight Tracking -->
-      <div class="card" style="--cat-color:var(--steel)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">✈️</div>
           <div>
             <div class="card-category" data-i18n="c.vols.cat">Streaming · Hybrid ELT</div>
             <div class="card-title" data-i18n="c.vols.title">Real-Time Flight Tracking Pipeline</div>
           </div>
-          <div class="card-icon">✈️</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -694,24 +530,23 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/flight-tracking-pipeline" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
 
       <!-- Banking Fraud Detection -->
-      <div class="card" style="--cat-color:var(--terra)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🔍</div>
           <div>
             <div class="card-category" data-i18n="c.fraud.cat">ML Production · Anomaly Detection</div>
             <div class="card-title" data-i18n="c.fraud.title">Real-Time Banking Fraud Detection</div>
           </div>
-          <div class="card-icon">🔍</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
-          <li data-i18n="c.fraud.b1">Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:var(--sage)">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)</li>
+          <li data-i18n="c.fraud.b1">Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:var(--accent)">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)</li>
           <li data-i18n="c.fraud.b2">Deployed a real-time inference API (FastAPI, Docker) serving predictions with &lt;50ms latency, with model registration via MLflow</li>
           <li data-i18n="c.fraud.b3">Automated drift monitoring (Evidently AI) and production performance dashboard with distribution drift alerts</li>
         </ul>
@@ -727,8 +562,7 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/fraud-detection-mlops.git" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
@@ -737,22 +571,20 @@ footer .wrap {
   </section>
 
   <!-- ═══ AI & AGENTS ═══ -->
-  <section class="section reveal" id="ai" data-s="2">
-    <div class="section-header">
-      <span class="section-num">02</span>
+  <section class="section reveal" id="ai">
+    <div class="section-head">
       <h2 class="section-title" data-i18n="s2.title">AI &amp; Multi-Agent Systems</h2>
-      <div class="section-line"></div>
     </div>
     <div class="projects-grid">
 
       <!-- MAS Sentinel -->
-      <div class="card" style="--cat-color:var(--dusk)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🛡️</div>
           <div>
             <div class="card-category" data-i18n="c.mas.cat">Multi-Agent · AI Monitoring</div>
             <div class="card-title" data-i18n="c.mas.title">MAS Pipeline Sentinel — Silent Failure Detection</div>
           </div>
-          <div class="card-icon">🛡️</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -771,20 +603,19 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/Multi-Agent-System-for-Data-Pipeline-Silent-Failure-Detection" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
 
       <!-- CloudSense FinOps -->
-      <div class="card" style="--cat-color:var(--steel)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">☁️</div>
           <div>
             <div class="card-category" data-i18n="c.finops.cat">Multi-Agent · FinOps · Cloud Cost</div>
             <div class="card-title" data-i18n="c.finops.title">CloudSense ⚡ — Autonomous FinOps Multi-Agent Platform</div>
           </div>
-          <div class="card-icon">☁️</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -805,8 +636,7 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/Autonomous-FinOps-Multi-Agent-Platform" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
@@ -815,22 +645,20 @@ footer .wrap {
   </section>
 
   <!-- ═══ MACHINE LEARNING ═══ -->
-  <section class="section reveal" id="ml" data-s="3">
-    <div class="section-header">
-      <span class="section-num">03</span>
+  <section class="section reveal" id="ml">
+    <div class="section-head">
       <h2 class="section-title" data-i18n="s3.title">Machine Learning &amp; Data Science</h2>
-      <div class="section-line"></div>
     </div>
     <div class="projects-grid">
 
       <!-- Student Performance -->
-      <div class="card" style="--cat-color:var(--steel)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🎓</div>
           <div>
             <div class="card-category" data-i18n="c.student.cat">Data Mining · Prediction</div>
             <div class="card-title" data-i18n="c.student.title">Student Performance — Data Mining &amp; Prediction</div>
           </div>
-          <div class="card-icon">🎓</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -848,20 +676,19 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/student-performance-data-mining" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
 
       <!-- DS Exploration -->
-      <div class="card" style="--cat-color:var(--dusk)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🔬</div>
           <div>
             <div class="card-category" data-i18n="c.ds.cat">Data Science · Clustering · Classification · Association Rules</div>
             <div class="card-title" data-i18n="c.ds.title">Exploration, Classification, Clustering &amp; Association Rules</div>
           </div>
-          <div class="card-icon">🔬</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -882,8 +709,7 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/data-insights" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
@@ -892,22 +718,20 @@ footer .wrap {
   </section>
 
   <!-- ═══ SOFTWARE ENGINEERING ═══ -->
-  <section class="section reveal" id="dev" data-s="4">
-    <div class="section-header">
-      <span class="section-num">04</span>
+  <section class="section reveal" id="dev">
+    <div class="section-head">
       <h2 class="section-title" data-i18n="s4.title">Software Engineering &amp; Architecture</h2>
-      <div class="section-line"></div>
     </div>
     <div class="projects-grid">
 
       <!-- Planify -->
-      <div class="card" style="--cat-color:var(--gold)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🗓️</div>
           <div>
             <div class="card-category" data-i18n="c.tt.cat">Optimization · Algorithms</div>
             <div class="card-title" data-i18n="c.tt.title">Intelligent Timetabling Optimization System — Planify</div>
           </div>
-          <div class="card-icon">🗓️</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -927,20 +751,19 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/Intelligent-Timetabling-Optimization-System" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
 
       <!-- Medical Cabinet EDA -->
-      <div class="card" style="--cat-color:var(--sage)">
+      <div class="card">
         <div class="card-top">
+          <div class="card-icon">🏥</div>
           <div>
             <div class="card-category" data-i18n="c.med.cat">Event-Driven · Microservices</div>
             <div class="card-title" data-i18n="c.med.title">Medical Practice Management — EDA Architecture</div>
           </div>
-          <div class="card-icon">🏥</div>
         </div>
         <div class="card-divider"></div>
         <ul class="card-bullets">
@@ -958,8 +781,7 @@ footer .wrap {
         </div>
         <div class="card-footer">
           <a href="https://github.com/Yassine-Ben-Terras/Event-driven-architecture-Cabinet-Medical" target="_blank" rel="noopener noreferrer" class="card-github-btn">
-            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            View on GitHub
+            <svg class="icon-fill"><use href="#i-github"/></svg> View on GitHub
           </a>
         </div>
       </div>
@@ -967,12 +789,54 @@ footer .wrap {
     </div>
   </section>
 
+  <!-- ═══ CERTIFICATIONS ═══ -->
+  <section class="section reveal" id="certs">
+    <div class="section-head">
+      <h2 class="section-title" data-i18n="s.cert.title">Certifications</h2>
+      <p class="section-sub" data-i18n="cert.sub">Microsoft Certified — cloud, data and security fundamentals.</p>
+    </div>
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-badge"><svg><use href="#i-shield"/></svg></div>
+        <div class="cert-code">AZ-900</div>
+        <div class="cert-name">Microsoft Certified: Azure Fundamentals</div>
+        <p class="cert-desc" data-i18n="cert.az900.desc">Core cloud concepts, Azure services, pricing and governance.</p>
+        <div class="cert-footer">
+          <div class="cert-issuer">Microsoft</div>
+          <a href="https://learn.microsoft.com/en-us/users/yassinebenterras-3046/credentials/ff9d18d6481de522?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer" class="cert-verify"><span data-i18n="cert.verify">Verify</span> <svg><use href="#i-extlink"/></svg></a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge"><svg><use href="#i-shield"/></svg></div>
+        <div class="cert-code">DP-900</div>
+        <div class="cert-name">Microsoft Certified: Azure Data Fundamentals</div>
+        <p class="cert-desc" data-i18n="cert.dp900.desc">Core data concepts across relational, non-relational and analytics workloads on Azure.</p>
+        <div class="cert-footer">
+          <div class="cert-issuer">Microsoft</div>
+          <a href="https://learn.microsoft.com/en-gb/users/benterras-5049/credentials/6e2a4e4d35afb122?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer" class="cert-verify"><span data-i18n="cert.verify">Verify</span> <svg><use href="#i-extlink"/></svg></a>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge"><svg><use href="#i-shield"/></svg></div>
+        <div class="cert-code">SC-900</div>
+        <div class="cert-name">Microsoft Certified: Security, Compliance, and Identity Fundamentals</div>
+        <p class="cert-desc" data-i18n="cert.sc900.desc">Fundamentals of security, compliance and identity across Microsoft solutions.</p>
+        <div class="cert-footer">
+          <div class="cert-issuer">Microsoft</div>
+          <a href="https://learn.microsoft.com/en-us/users/yassinebenterras-3046/credentials/b38c418e47264a5?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer" class="cert-verify"><span data-i18n="cert.verify">Verify</span> <svg><use href="#i-extlink"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ═══ TECH STACK ═══ -->
-  <section class="section reveal" id="backend" data-s="5">
-    <div class="section-header">
-      <span class="section-num">05</span>
+  <section class="section reveal" id="stack">
+    <div class="section-head">
       <h2 class="section-title" data-i18n="s5.title">Technical Stack</h2>
-      <div class="section-line"></div>
     </div>
     <div class="skills-grid">
 
@@ -1034,13 +898,13 @@ footer .wrap {
 <footer>
   <div class="wrap">
     <div class="foot-name">Yassine Ben Terras</div>
-    <div class="foot-meta">Data Engineer &amp; AI · Rabat, Maroc · yassine.benterras02@gmail.com</div>
+    <div class="foot-meta">Data Engineer &amp; AI · Rabat, Maroc · yassine.benterras@gmail.com</div>
     <div class="foot-links">
-      <a href="https://github.com/YassineBentTerras" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub ↗</a>
+      <a href="https://github.com/Yassine-Ben-Terras" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub ↗</a>
       <div class="foot-divider"></div>
       <a href="https://www.linkedin.com/in/yassine-ben-terras-862348294/" target="_blank" rel="noopener noreferrer" class="foot-link">LinkedIn ↗</a>
       <div class="foot-divider"></div>
-      <a href="mailto:yassine.benterras02@gmail.com" class="foot-link">Email ↗</a>
+      <a href="mailto:yassine.benterras@gmail.com" class="foot-link">Email ↗</a>
     </div>
     <div class="foot-copy">© 2026 Yassine Ben Terras</div>
   </div>
@@ -1071,7 +935,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const target = document.getElementById(id);
     if (!target) return;
     e.preventDefault();
-    const y = target.getBoundingClientRect().top + window.scrollY - 68;
+    const y = target.getBoundingClientRect().top + window.scrollY - 56;
     window.scrollTo({ top: y, behavior: 'smooth' });
     closeMenu();
   });
@@ -1084,39 +948,25 @@ window.addEventListener('scroll', () => {
   prog.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
 }, { passive: true });
 
-/* ── SIDE NAV DOTS ── */
-const scenes = document.querySelectorAll('[data-s]');
-const dots = document.querySelectorAll('.nd');
-
-const navObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const idx = +e.target.dataset.s;
-      dots.forEach((d, i) => d.classList.toggle('on', i === idx));
-    }
-  });
-}, { threshold: 0.35 });
-scenes.forEach(s => navObs.observe(s));
-dots.forEach(d => d.addEventListener('click', () => {
-  const idx = +d.dataset.s;
-  if (scenes[idx]) scenes[idx].scrollIntoView({ behavior: 'smooth' });
-}));
-
 /* ── SCROLL REVEAL ── */
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('show'); revObs.unobserve(e.target); }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
 /* ── TRANSLATIONS ── */
 const translations = {
   fr: {
-    'nav.data':'Data Engineering','nav.ai':'IA & Agents','nav.ml':'Machine Learning','nav.dev':'Génie Logiciel','nav.skills':'Stack Technique',
+    'nav.data':'Data Engineering','nav.ai':'IA & Agents','nav.ml':'Machine Learning','nav.dev':'Génie Logiciel','nav.cert':'Certifications','nav.skills':'Stack Technique',
     'hero.sub':'Pipelines temps réel, architectures event-driven, systèmes multi-agents et Machine Learning production-grade — du prototype à la mise en production.',
     's1.title':'Data Engineering — Streaming & Pipelines','s2.title':'IA & Systèmes Multi-Agents',
     's3.title':'Machine Learning & Data Science','s4.title':'Génie Logiciel & Architecture','s5.title':'Stack Technique',
+    's.cert.title':'Certifications','cert.sub':'Certifié Microsoft — fondamentaux cloud, données et sécurité.','cert.verify':'Vérifier',
+    'cert.az900.desc':'Concepts cloud essentiels, services Azure, tarification et gouvernance.',
+    'cert.dp900.desc':"Concepts fondamentaux des données : workloads relationnels, non-relationnels et analytiques sur Azure.",
+    'cert.sc900.desc':"Fondamentaux de la sécurité, de la conformité et de l'identité dans l'écosystème Microsoft.",
     'c.vols.cat':'Streaming · ELT Hybride','c.vols.title':'Pipeline Suivi de Vols en Temps Réel',
     'c.vols.b1':"Conçu un pipeline ELT bout-en-bout pour l'ingestion temps réel de télémétrie de vols mondiaux (OpenSky Network), séparant streaming bas-latence et batch analytique",
     'c.vols.b2':"Implémenté une stratégie dual-write vers PostgreSQL (modèles dbt dimensionnels) et Cassandra (séries temporelles haute-fréquence) selon le profil d'accès",
@@ -1138,7 +988,7 @@ const translations = {
     'c.tt.b2':"Implémenté un moteur d'optimisation avancé gérant disponibilités des professeurs, capacités des salles, types de séances et horaires — avec authentification Spring Security + JWT, import Excel (Apache POI) et export PDF automatique",
     'c.tt.b3':"Architecture monorepo frontend Vue 3 + Vite + TypeScript + Pinia et backend Spring Boot + JPA avec un solveur MaxSAT appliquant contraintes dures et préférences souples",
     'c.fraud.cat':"ML Production · Détection d'Anomalies",'c.fraud.title':'Détection de Fraude Bancaire en Temps Réel',
-    'c.fraud.b1':'Conçu un pipeline complet de détection de fraude (ingestion Kafka, feature store, entraînement XGBoost/LightGBM avec SMOTE) — <strong style="color:var(--terra)">AUC-PR de 0.94</strong> sur un dataset fortement déséquilibré (0,1% de fraudes)',
+    'c.fraud.b1':'Conçu un pipeline complet de détection de fraude (ingestion Kafka, feature store, entraînement XGBoost/LightGBM avec SMOTE) — <strong style="color:var(--accent)">AUC-PR de 0.94</strong> sur un dataset fortement déséquilibré (0,1% de fraudes)',
     'c.fraud.b2':"Déployé une API d'inférence temps réel (FastAPI, Docker) servant les prédictions avec une latence <50ms, enregistrement des modèles via MLflow",
     'c.fraud.b3':'Monitoring de drift automatisé (Evidently AI) et dashboard de suivi des métriques de performance en production — alertes sur dérive de distribution',
     'c.student.cat':'Data Mining · Prédiction','c.student.title':'Student Performance — Data Mining & Prediction',
@@ -1153,10 +1003,14 @@ const translations = {
     'sk.cloud':'Cloud & Plateformes','sk.de':'Data Engineering','sk.devops':'DevOps & CI/CD','sk.ml':'Machine Learning','sk.ai':'IA & Agents','sk.prog':'Programmation'
   },
   en: {
-    'nav.data':'Data Engineering','nav.ai':'AI & Agents','nav.ml':'Machine Learning','nav.dev':'Software Eng.','nav.skills':'Technical Stack',
+    'nav.data':'Data Engineering','nav.ai':'AI & Agents','nav.ml':'Machine Learning','nav.dev':'Software Eng.','nav.cert':'Certifications','nav.skills':'Technical Stack',
     'hero.sub':'Real-time pipelines, event-driven architectures, multi-agent systems and production-grade Machine Learning — from prototype to production.',
     's1.title':'Data Engineering — Streaming & Pipelines','s2.title':'AI & Multi-Agent Systems',
     's3.title':'Machine Learning & Data Science','s4.title':'Software Engineering & Architecture','s5.title':'Technical Stack',
+    's.cert.title':'Certifications','cert.sub':'Microsoft Certified — cloud, data and security fundamentals.','cert.verify':'Verify',
+    'cert.az900.desc':'Core cloud concepts, Azure services, pricing and governance.',
+    'cert.dp900.desc':'Core data concepts across relational, non-relational and analytics workloads on Azure.',
+    'cert.sc900.desc':'Fundamentals of security, compliance and identity across Microsoft solutions.',
     'c.vols.cat':'Streaming · Hybrid ELT','c.vols.title':'Real-Time Flight Tracking Pipeline',
     'c.vols.b1':'Designed an end-to-end ELT pipeline for real-time ingestion of global flight telemetry (OpenSky Network), separating low-latency streaming from analytical batch processing',
     'c.vols.b2':'Implemented a dual-write strategy to PostgreSQL (dbt dimensional models) and Cassandra (high-frequency time series) based on access profiles',
@@ -1178,7 +1032,7 @@ const translations = {
     'c.tt.b2':'Built an advanced optimization engine handling professor availability, room capacities, session types, and working hours — with secure Spring Security + JWT auth, Excel bulk import (Apache POI), and automated PDF export',
     'c.tt.b3':'Monorepo architecture with Vue 3 + Vite + TypeScript + Pinia frontend and Spring Boot + JPA backend; MaxSAT solver enforcing hard constraints and optimizing soft preferences',
     'c.fraud.cat':'ML Production · Anomaly Detection','c.fraud.title':'Real-Time Banking Fraud Detection',
-    'c.fraud.b1':'Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:var(--terra)">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)',
+    'c.fraud.b1':'Designed a complete fraud detection pipeline (Kafka ingestion, feature store, XGBoost/LightGBM training with SMOTE) — <strong style="color:var(--accent)">AUC-PR of 0.94</strong> on a heavily imbalanced dataset (0.1% fraud rate)',
     'c.fraud.b2':'Deployed a real-time inference API (FastAPI, Docker) serving predictions with &lt;50ms latency, with model registration via MLflow',
     'c.fraud.b3':'Automated drift monitoring (Evidently AI) and production performance dashboard with distribution drift alerts',
     'c.student.cat':'Data Mining · Prediction','c.student.title':'Student Performance — Data Mining & Prediction',
