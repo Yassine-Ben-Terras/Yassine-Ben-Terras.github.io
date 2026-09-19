@@ -14,9 +14,9 @@
 
 ## 🌐 Overview
 
-Personal portfolio website showcasing end-to-end data engineering projects, autonomous multi-agent AI systems, machine learning pipelines, and full-stack software engineering work. Built as a single-file HTML application and hosted on **GitHub Pages**.
+Personal portfolio website showcasing end-to-end data engineering projects, machine learning pipelines, and full-stack software engineering work. Built as a single-file HTML application and hosted on **GitHub Pages**.
 
-The site features bilingual support **(EN / FR)**, a custom animated cursor, scroll-driven progress bar, intersection-observer reveal animations, and a fully responsive layout down to mobile.
+The site features bilingual support **(EN / FR)**, a custom animated cursor, and a fully responsive layout down to mobile.
 
 ---
 
