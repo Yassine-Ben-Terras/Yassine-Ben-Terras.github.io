@@ -20,16 +20,6 @@ The site features bilingual support **(EN / FR)**, a custom animated cursor, and
 
 ---
 
-## 📬 Contact
-
-| | |
-|---|---|
-| 📧 Email | yassine.benterras02@gmail.com |
-| 💼 LinkedIn | [yassine-ben-terras-862348294](https://www.linkedin.com/in/yassine-ben-terras-862348294/) |
-| 🐙 GitHub | [Yassine-Ben-Terras](https://github.com/Yassine-Ben-Terras) |
-
----
-
 <div align="center">
 
 Made with HTML, CSS & JavaScript · Hosted on GitHub Pages
