@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✦ Yassine Ben Terras — Portfolio
+# Yassine Ben Terras-Portfolio
 
 **Data Engineer & AI** · Real-time pipelines · Multi-agent systems · Production ML
 
@@ -19,9 +19,3 @@ Personal portfolio website showcasing end-to-end data engineering projects, mach
 The site features bilingual support **(EN / FR)**, a custom animated cursor, and a fully responsive layout down to mobile.
 
 ---
-
-<div align="center">
-
-Made with HTML, CSS & JavaScript · Hosted on GitHub Pages
-
-</div>
